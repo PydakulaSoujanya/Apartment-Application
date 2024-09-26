@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .create-project-btn {
+      margin-top: 20px;
+      float: right;
+    }
+    .nav-tabs .nav-link.active {
+      border-color: #0dcaf0 #0dcaf0 #fff;
+      color: #0dcaf0;
+    }
+    .nav-tabs .nav-link {
+      color: #6c757d;
+    }
+    .nav-tabs .nav-link:hover {
+      color: #0dcaf0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container my-5">
+    <h2>Projects</h2>
+
+    <!-- Tabs Navigation -->
+    <ul class="nav nav-tabs mb-3">
+      <li class="nav-item">
+        <a class="nav-link" href="#">List View</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Open</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">In Progress</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Closed</a>
+      </li>
+    </ul>
+
+    <!-- Button to create a project (changed to link) -->
+    <a href="createproject.html" class="btn btn-info create-project-btn">Create Project</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
