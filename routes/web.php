@@ -221,6 +221,8 @@ use App\Http\Controllers\VisitorController;
 
 Route::middleware(['auth', 'user-access:resident'])->group(function () {
     Route::get('/resident/home', [HomeController::class, 'residentHome'])->name('resident.home');
+   
+
     
     // Entry Passes Routes for Resident
     Route::get('/entry-passes', [EntryPassController::class, 'index'])->name('resident.entry-passes.index');
@@ -278,6 +280,7 @@ use App\Http\Controllers\ResidentExpenseController;
 // Ensure that the route is protected with middleware, if needed
 Route::middleware(['auth', 'user-access:resident'])->group(function () {
     Route::get('/resident/expenses', [ResidentExpenseController::class, 'apartmentexpenditure'])->name('resident.expenses.index');
+  
     
 });
 
@@ -301,7 +304,7 @@ Route::middleware(['auth', 'user-access:resident'])->group(function () {
     Route::get('/residentfacilities/check-availability', [FacilityController::class, 'checkAvailability'])->name('resident.facilities.check-availability');
     Route::get('/residentfacilities/get-times/{id}', [FacilityController::class, 'getFacilityTimes'])->name('resident.facilities.get-times');
     Route::post('/resident/facilities/check-availability', [FacilityController::class, 'bookFacility'])->name('resident.facilities.check-availability');
-
+  
 
 });
 
@@ -318,11 +321,18 @@ Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(functio
 
 use App\Http\Controllers\ResidentAccountController;
 
+Route::middleware(['auth', 'user-access:resident'])->group(function () {
+    Route::get('/resident/home', [ResidentAccountController::class, 'showResidentHome'])->name('resident.home');
+
+
+});
+
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/resident-details', [ResidentAccountController::class, 'index'])->name('admin.resident.index');
     Route::get('/resident-details/{id}/edit', [ResidentAccountController::class, 'edit'])->name('admin.resident.edit');
     Route::put('/resident-details/{id}', [ResidentAccountController::class, 'update'])->name('admin.resident.update');
     Route::delete('/resident-details/{id}', [ResidentAccountController::class, 'destroy'])->name('admin.resident.destroy');
+
    
   
 });

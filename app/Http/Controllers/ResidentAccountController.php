@@ -6,6 +6,8 @@ use App\Models\ResidentAccount;
 use App\Models\ResidentDetail;
 use App\Models\MaintenanceCharge; // Import the ResidentDetail model
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 class ResidentAccountController extends Controller
 {
     // Display all resident details in a table
@@ -68,6 +70,32 @@ class ResidentAccountController extends Controller
 
         return redirect()->route('admin.resident.index')->with('success', 'Resident deleted successfully.');
     }
+
+    public function showResidentHome()
+    {
+        $resident = ResidentDetail::where('user_id', Auth::id())->first();
+    
+        if (!$resident) {
+            return redirect()->back()->with('error', 'Resident not found.');
+        }
+    
+        $latestCharge = MaintenanceCharge::latest()->first();
+    
+        if (!$latestCharge) {
+            return redirect()->back()->with('error', 'Maintenance charge not found.');
+        }
+    
+        $area = $resident->area;
+        $amountPerSqFt = $latestCharge->amount_per_sqt;
+        $totalAmountDue = $area * $amountPerSqFt;
+    
+        return view('resident.residentHome', [
+            'totalAmountDue' => $totalAmountDue,
+            'resident' => $resident,
+        ]);
+    }
+    
+
 
     
 

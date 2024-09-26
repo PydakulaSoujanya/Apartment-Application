@@ -249,13 +249,12 @@
 
                     <!-- Tab Contents -->
                     <div id="dues-content" class="tab-content">
-                        <div class="mt-3">
-    @if (isset($maintenance_fee))
-        <h4>Amount Due: ₹{{ number_format($maintenance_fee, 2) }} | Accrued Penalty: ₹0</h4>
-    @else
-        <h4>Amount Due: ₹0.00 | Accrued Penalty: ₹0</h4>
-    @endif
-</div>
+                    <div class="mt-3">
+        <h4 class="mb-0">
+            Amount Due: <span id="amount-due">₹{{ number_format($totalAmountDue, 2) }}</span> 
+            | Accrued Penalty: <span id="accrued-penalty">₹0</span>
+        </h4>
+    </div>
 
 
                         <div class="row mt-4">
