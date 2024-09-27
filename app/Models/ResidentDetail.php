@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ResidentDetail extends Model
 {
     use HasFactory;
-  
+
     protected $fillable = [
         'user_id',
         'admin_id',
@@ -31,5 +31,3 @@ class ResidentDetail extends Model
         return $this->belongsTo(User::class);
     }
 }
-
-
