@@ -82,16 +82,16 @@
         }
         /* Custom background colors for specific cards */
         .super-admin-dashboard-bg-blue {
-            background-color: #007bff !important; /* Blue */
+            background-color: #7f8e9e !important; /* Blue */
         }
         .super-admin-dashboard-bg-cyan {
-            background-color: #17a2b8 !important; /* Cyan */
+            background-color: #5e8389 !important; /* Cyan */
         }
         .super-admin-dashboard-bg-orange {
-            background-color: #fd7e14 !important; /* Orange */
+            background-color: #7f8e9e !important; /* Orange */
         }
         .super-admin-dashboard-bg-purple {
-            background-color: #6f42c1 !important; /* Purple */
+            background-color:#5e8389 !important; /* Purple */
         }
         .super-admin-dashboard-bg-light-blue {
             background-color: #cce5ff !important; /* Light Blue */
@@ -122,10 +122,6 @@
 </head>
 <body>
 
-    <!-- Dashboard Title -->
-    <!-- <div class="container"> -->
-       
-    <!-- </div> -->
 
  
     
@@ -134,12 +130,12 @@
         <h1 class="super-admin-dashboard-title">Super Admin Dashboard</h1>
         <div class="d-flex justify-content-between align-items-center mt-4">
             <h2>Hi, Welcome back 👋</h2>
-            <div class="d-flex align-items-center">
+            <!-- <div class="d-flex align-items-center"> -->
                 <!-- Search Bar -->
-                <div class="me-3">
+                <!-- <div class="me-3">
                     <input type="text" class="form-control" placeholder="Search...">
-                </div>
-                <div class="d-flex align-items-center ms-3">
+                </div> -->
+                <!-- <div class="d-flex align-items-center ms-3">
                     <div class="me-3">
                         <select class="form-select" aria-label="Country Selector">
                             <option selected>🇺🇸 English</option>
@@ -148,13 +144,13 @@
                             <option value="3">🇩🇪 German</option>
                         </select>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="d-flex align-items-center">
-                    <div class="me-3">
+                <!-- <div class="d-flex align-items-center"> -->
+                    <!-- <div class="me-3">
                         <i class="bi bi-bell super-admin-dashboard-header-icons" style="cursor: pointer;"></i>
-                    </div>
-                    <div class="dropdown">
+                    </div> -->
+                    <!-- <div class="dropdown">
                         <i class="bi bi-person-circle super-admin-dashboard-header-icons dropdown-toggle" style="cursor: pointer;" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false"></i>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                             <li><h6 class="dropdown-header">John Doe</h6></li>
@@ -162,9 +158,9 @@
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Logout</a></li>
                         </ul>
-                    </div>
-                </div>
-            </div>
+                    </div> -->
+                <!-- </div>
+            </div> -->
         </div>
 
         <!-- Main Cards Section -->
@@ -172,8 +168,8 @@
             <!-- Weekly Sales Card -->
             <div class="col-12 col-md-3 mb-4">
                 <div class="card card-sales p-3 super-admin-dashboard-card">
-                    <div class="super-admin-dashboard-card-header super-admin-dashboard-bg-blue">
-                        <h4>User Administration</h4>
+                    <div class="super-admin-dashboard-card-header super-admin-dashboard-bg-blue" >
+                        <h4>Total Users</h4>
                     </div>
                     <div class="super-admin-dashboard-card-body">
                         <div class="d-flex justify-content-between align-items-center">
@@ -193,12 +189,12 @@
             <div class="col-12 col-md-3 mb-4">
                 <div class="card card-users p-3 super-admin-dashboard-card">
                     <div class="super-admin-dashboard-card-header super-admin-dashboard-bg-cyan">
-                        <h4>Financial Summary</h4>
+                        <h4>Apartment Count</h4>
                     </div>
                     <div class="super-admin-dashboard-card-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h2>1.35m</h2>
+                                <h2>100</h2>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
@@ -213,12 +209,12 @@
             <div class="col-12 col-md-3 mb-4">
                 <div class="card card-orders p-3 super-admin-dashboard-card">
                     <div class="super-admin-dashboard-card-header super-admin-dashboard-bg-orange">
-                        <h4>Key Reports</h4>
+                        <h4>Income</h4>
                     </div>
                     <div class="super-admin-dashboard-card-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h2>1.72m</h2>
+                                <h2>5 cr</h2>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
@@ -233,12 +229,12 @@
             <div class="col-12 col-md-3 mb-4">
                 <div class="card card-messages p-3 super-admin-dashboard-card">
                     <div class="super-admin-dashboard-card-header super-admin-dashboard-bg-purple">
-                        <h4>Communication Tool</h4>
+                        <h4>Expenses</h4>
                     </div>
                     <div class="super-admin-dashboard-card-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h2>234</h2>
+                                <h2>50k</h2>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
@@ -253,125 +249,96 @@
 
         <!-- Additional Cards Section -->
         <div class="row g-3">
-            <!-- Financial Summary (Pie Chart) -->
-            <div class="col-lg-6 col-md-12 super-admin-dashboard-card-gap-bottom">
-                <div class="super-admin-dashboard-card">
-                    <div class="super-admin-dashboard-card-header super-admin-dashboard-bg-light-blue">
-                        <h5>Financial Summary</h5>
-                    </div>
-                    <div class="super-admin-dashboard-card-body">
-                        <div class="super-admin-dashboard-chart-container">
-                            <canvas id="superAdminFinancialPieChart"></canvas>
-                        </div>
-                        <ul id="superAdminFinancialSummary">
-                            <li><strong>Total Income:</strong> ₹64,000</li>
-                            <li><strong>Total Expenses:</strong> ₹28,000</li>
-                            <li><strong>Pending Dues:</strong> ₹5,000</li>
-                        </ul>
-                    </div>
-                </div>
+    <!-- Financial Summary (Pie Chart) -->
+    <div class="col-lg-5 col-md-12 mx-auto super-admin-dashboard-card-gap-bottom">
+        <div class="super-admin-dashboard-card p-3">
+            <div class="super-admin-dashboard-card-header super-admin-dashboard-bg-light-blue">
+                <h5>Financial Summary</h5>
             </div>
-
-            <!-- Occupancy Rate (Bar Graph) -->
-            <div class="col-lg-6 col-md-12 super-admin-dashboard-card-gap-bottom">
-                <div class="super-admin-dashboard-card">
-                    <div class="super-admin-dashboard-card-header super-admin-dashboard-bg-light-green">
-                        <h5>Occupancy Rate by Block</h5>
-                    </div>
-                    <div class="super-admin-dashboard-card-body">
-                        <div class="super-admin-dashboard-chart-container">
-                            <canvas id="superAdminOccupancyBarChart"></canvas>
-                        </div>
-                        <ul id="superAdminOccupancyRate">
-                            <li><strong>Block A:</strong> 82%</li>
-                            <li><strong>Block B:</strong> 84%</li>
-                            <li><strong>Block C:</strong> 88%</li>
-                        </ul>
+            <div class="super-admin-dashboard-card-body">
+                <div class="d-flex justify-content-center">
+                    <div class="super-admin-dashboard-chart-container">
+                        <canvas id="superAdminFinancialPieChart"></canvas>
                     </div>
                 </div>
-            </div>
-
-            <!-- Maintenance Requests (Doughnut Chart) -->
-            <div class="col-lg-6 col-md-12 super-admin-dashboard-card-gap-bottom">
-                <div class="super-admin-dashboard-card">
-                    <div class="super-admin-dashboard-card-header super-admin-dashboard-bg-light-yellow">
-                        <h5>Maintenance Requests</h5>
-                    </div>
-                    <div class="super-admin-dashboard-card-body">
-                        <div class="super-admin-dashboard-chart-container">
-                            <canvas id="superAdminMaintenanceRequestsChart"></canvas>
-                        </div>
-                        <ul id="superAdminMaintenanceRequests">
-                            <li><strong>Pending:</strong> 45</li>
-                            <li><strong>Completed:</strong> 120</li>
-                            <li><strong>Overdue:</strong> 10</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Website Visits (Line Graph) -->
-            <div class="col-lg-6 col-md-12 super-admin-dashboard-card-gap-bottom">
-                <div class="super-admin-dashboard-card">
-                    <div class="super-admin-dashboard-card-header super-admin-dashboard-bg-light-red">
-                        <h5>Website Visits</h5>
-                    </div>
-                    <div class="super-admin-dashboard-card-body">
-                        <div class="super-admin-dashboard-chart-container">
-                            <canvas id="superAdminWebsiteVisitsChart"></canvas>
-                        </div>
-                        <ul id="superAdminWebsiteVisitsStats">
-                            <li><strong>Total Visits:</strong> 1.2m</li>
-                            <li><strong>Unique Visitors:</strong> 850k</li>
-                            <li><strong>Returning Visitors:</strong> 350k</li>
-                        </ul>
-                    </div>
-                </div>
+                <ul id="superAdminFinancialSummary" class="list-unstyled">
+                    <li><strong>Total Income:</strong> ₹64,000</li>
+                    <li><strong>Total Expenses:</strong> ₹28,000</li>
+                    <li><strong>Pending Dues:</strong> ₹5,000</li>
+                </ul>
             </div>
         </div>
+    </div>
 
-        
-        <footer>
-            <div class="container mt-5">
-                <div class="row">
-                    <!-- Footer Links Card -->
-                    <div class="col-12 col-md-4 mb-4 mb-md-0">
-                        <div class="card p-3 super-admin-dashboard-card bg-light">
-                            <h5 class="text-center">Quick Links</h5>
-                            <div class="footer-links text-center">
-                                <a href="#">About</a> |
-                                <a href="#">Contact</a> |
-                                <a href="#">Privacy Policy</a> |
-                                <a href="#">Terms of Service</a>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <!-- Footer Social Media Icons Card -->
-                    <div class="col-12 col-md-4 mb-4 mb-md-0">
-                        <div class="card p-3 super-admin-dashboard-card bg-light">
-                            <h5 class="text-center">Follow Us</h5>
-                            <div class="social-icons text-center">
-                                <a href="#" class="bi bi-facebook mx-2"></a>
-                                <a href="#" class="bi bi-twitter mx-2"></a>
-                                <a href="#" class="bi bi-instagram mx-2"></a>
-                                <a href="#" class="bi bi-linkedin mx-2"></a>
-                            </div>
-                        </div>
-                    </div>
-        
-                    <!-- Footer Copyright Card -->
-                    <div class="col-12 col-md-4 mb-4 mb-md-0">
-                        <div class="card p-3 super-admin-dashboard-card bg-light">
-                            <h5 class="text-center">Copyright</h5>
-                            <p class="text-center">&copy; 2024 Your Company. All Rights Reserved.</p>
-                        </div>
+    <!-- Occupancy Rate (Bar Graph) -->
+    <div class="col-lg-5 col-md-12 mx-auto super-admin-dashboard-card-gap-bottom">
+        <div class="super-admin-dashboard-card p-3">
+            <div class="super-admin-dashboard-card-header super-admin-dashboard-bg-light-green">
+                <h5>Occupancy Rate by Block</h5>
+            </div>
+            <div class="super-admin-dashboard-card-body">
+                <div class="d-flex justify-content-center">
+                    <div class="super-admin-dashboard-chart-container">
+                        <canvas id="superAdminOccupancyBarChart"></canvas>
                     </div>
                 </div>
+                <ul id="superAdminOccupancyRate" class="list-unstyled">
+                    <li><strong>Block A:</strong> 82%</li>
+                    <li><strong>Block B:</strong> 84%</li>
+                    <li><strong>Block C:</strong> 88%</li>
+                </ul>
             </div>
-            <!-- Extra space below the footer -->
-            <div class="mb-5"></div>
-        </footer>
+        </div>
+    </div>
+
+    <!-- Maintenance Requests (Doughnut Chart) -->
+    <div class="col-lg-5 col-md-12 mx-auto super-admin-dashboard-card-gap-bottom">
+        <div class="super-admin-dashboard-card p-3">
+            <div class="super-admin-dashboard-card-header super-admin-dashboard-bg-light-yellow">
+                <h5>Maintenance Requests</h5>
+            </div>
+            <div class="super-admin-dashboard-card-body">
+                <div class="d-flex justify-content-center">
+                    <div class="super-admin-dashboard-chart-container">
+                        <canvas id="superAdminMaintenanceRequestsChart"></canvas>
+                    </div>
+                </div>
+                <ul id="superAdminMaintenanceRequests" class="list-unstyled">
+                    <li><strong>Pending:</strong> 45</li>
+                    <li><strong>Completed:</strong> 120</li>
+                    <li><strong>Overdue:</strong> 10</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Website Visits (Line Graph) -->
+    <div class="col-lg-5 col-md-12 mx-auto super-admin-dashboard-card-gap-bottom">
+        <div class="super-admin-dashboard-card p-3">
+            <div class="super-admin-dashboard-card-header super-admin-dashboard-bg-light-red">
+                <h5>Website Visits</h5>
+            </div>
+            <div class="super-admin-dashboard-card-body">
+                <div class="d-flex justify-content-center">
+                    <div class="super-admin-dashboard-chart-container">
+                        <canvas id="superAdminWebsiteVisitsChart"></canvas>
+                    </div>
+                </div>
+                <ul id="superAdminWebsiteVisitsStats" class="list-unstyled">
+                    <li><strong>Total Visits:</strong> 1.2m</li>
+                    <li><strong>Unique Visitors:</strong> 850k</li>
+                    <li><strong>Returning Visitors:</strong> 350k</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+        
+      
         
         <!-- Placeholder for additional cards or content if needed -->  
     </div>

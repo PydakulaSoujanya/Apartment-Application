@@ -12,27 +12,37 @@
     <!-- Bootstrap CSS (Optional) -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
+
+   
+
         #sidebar {
             width: 250px;
             min-height: 100vh;
-            transition: width 0.3s ease; /* Smooth transition for collapse effect */
+            transition: width 0.3s ease;
+            margin: 0;
+            padding: 0;
+            /* Smooth transition for collapse effect */
         }
 
         #sidebar.collapsed {
-            width: 80px; /* Adjusted width when collapsed */
+            width: 80px;
+            /* Adjusted width when collapsed */
         }
 
         .collapsed .nav-text {
-            display: none; /* Hide the text in collapsed state */
+            display: none;
+            /* Hide the text in collapsed state */
         }
 
         .collapsed .sidebar-logo {
-            width: 50px; /* Smaller logo in collapsed state */
+            width: 50px;
+            /* Smaller logo in collapsed state */
             height: 50px;
         }
 
         .collapsed .collapse-icon {
-            transform: rotate(180deg); /* Rotate icon when collapsed */
+            transform: rotate(180deg);
+            /* Rotate icon when collapsed */
         }
 
         .profile-width {
@@ -105,12 +115,12 @@
 
     <!-- Vanilla JavaScript for toggling collapse -->
     <script>
-        document.getElementById('collapseBtn').addEventListener('click', function () {
+        document.getElementById('collapseBtn').addEventListener('click', function() {
             document.getElementById('sidebar').classList.toggle('collapsed');
         });
 
         // Logout functionality
-        document.getElementById('logoutIcon').addEventListener('click', function () {
+        document.getElementById('logoutIcon').addEventListener('click', function() {
             event.preventDefault();
             document.getElementById('logout-form').submit();
         });
