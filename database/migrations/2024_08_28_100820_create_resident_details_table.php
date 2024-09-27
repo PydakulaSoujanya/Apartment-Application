@@ -8,15 +8,13 @@ class CreateResidentDetailsTable extends Migration
 {
     public function up()
     {
-
-       
         Schema::create('resident_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('admin_id');  
-            $table->string('flat_number');
+            $table->string('flat_no');
             $table->string('flat_type');
-            $table->string('floor');
+            $table->string('floor');  // Ensure this column exists
             $table->string('block')->nullable();
             $table->string('flat_holder_name')->nullable();
             $table->string('name');
@@ -27,12 +25,13 @@ class CreateResidentDetailsTable extends Migration
             $table->integer('vehicles')->nullable();
             $table->integer('area')->nullable();
             $table->timestamps();
-
+    
+            // Foreign keys
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
-
+    
     public function down()
     {
         Schema::dropIfExists('resident_details');

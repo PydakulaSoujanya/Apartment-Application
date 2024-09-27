@@ -1,18 +1,3 @@
-<!-- 
- <div class="col-md-3">
-    <div class="sidebar bg-light p-3">
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('superadmin.home') }}">Dashboard</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('superadmin.register.admin.form') }}">Register New Admin</a>
-            </li>
-
-        </ul>
-    </div>
-</div>  -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,14 +66,14 @@
                 <div class="icon-container">
                     <i class="bi bi-file-earmark icon"></i>
                 </div>
-                <div class="icon-container" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-          <i class="bi bi-box-arrow-right icon"></i>
-        </div>
+                <div class="icon-container" id="logoutIcon">
+                    <i class="bi bi-box-arrow-right icon"></i>
+                </div>
             </div>
 
             <div class="sidebar d-flex flex-column" id="sidebar">
                 <div class="sidebar-header p-3 text-center">
-                    <img src="{{ asset('images/iiiq-logo.jpeg') }}" alt="Logo" class="sidebar-logo" >
+                    <img src="{{ asset('images/iiiq-logo.jpeg') }}" alt="Logo" class="sidebar-logo">
                     <h5 class="company-name">iiiQBets.</h5>
                     <i class="bi bi-chevron-left collapse-icon" id="collapseBtn"></i>
                 </div>
@@ -101,12 +86,17 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('superadmin.register.admin.form') }}">
-                        <i class="bi bi-person"></i>
+                            <i class="bi bi-person"></i>
                             <span class="nav-text">Register New Admin</span>
                         </a>
                     </li>
                     <!-- Additional Nav Items Here -->
                 </ul>
+
+                <!-- Logout form (hidden) -->
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div>
         </div>
     </div>
@@ -118,8 +108,13 @@
         document.getElementById('collapseBtn').addEventListener('click', function () {
             document.getElementById('sidebar').classList.toggle('collapsed');
         });
+
+        // Logout functionality
+        document.getElementById('logoutIcon').addEventListener('click', function () {
+            event.preventDefault();
+            document.getElementById('logout-form').submit();
+        });
     </script>
 </body>
 
 </html>
-
