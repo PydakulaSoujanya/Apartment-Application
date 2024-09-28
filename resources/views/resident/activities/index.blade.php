@@ -70,9 +70,9 @@
         <div class="card-body">
             <form>
                 <div class="form-group row mb-3">
-                    <label for="facility" class="col-sm-4 col-form-label text-right pr-4">Facility</label>
+                    <label for="facility" class="col-sm-4 col-form-label text-right pr-4">Activity</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="facility" placeholder="Enter facility">
+                        <input type="text" class="form-control" id="facility" placeholder="Enter activity">
                     </div>
                 </div>
 

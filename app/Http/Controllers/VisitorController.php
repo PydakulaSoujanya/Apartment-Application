@@ -121,6 +121,37 @@ $visitor->update(['qr_code_filename' => $qrCodeFilename]);
         $visitor = Visitor::where('user_id', Auth::id())->findOrFail($id);
         return view('resident.visitors.show', compact('visitor'));
     }
+
+    public function approve($id)
+{
+    $visitor = Visitor::where('user_id', Auth::id())->findOrFail($id);
+    
+    // Only allow the resident to approve if the current status is pending
+    if ($visitor->status === 'pending') {
+        $visitor->status = 'approved';
+        $visitor->save();
+
+        return redirect()->route('resident.visitors.index')->with('success', 'Visitor has been approved.');
+    }
+
+    return redirect()->route('resident.visitors.index')->with('error', 'Visitor cannot be approved.');
+}
+
+public function reject($id)
+{
+    $visitor = Visitor::where('user_id', Auth::id())->findOrFail($id);
+    
+    // Only allow the resident to reject if the current status is pending
+    if ($visitor->status === 'pending') {
+        $visitor->status = 'rejected';
+        $visitor->save();
+
+        return redirect()->route('resident.visitors.index')->with('success', 'Visitor has been rejected.');
+    }
+
+    return redirect()->route('resident.visitors.index')->with('error', 'Visitor cannot be rejected.');
+}
+
     
 }
 

@@ -13,7 +13,7 @@ class Visitor extends Model
     protected $fillable = [
         'visitor_name',
         'visitor_number',
-        'visitor_email', // Add this line
+        'visitor_email', 
         'visiting_reason',
         'visiting_date',
         'user_id',
@@ -23,8 +23,8 @@ class Visitor extends Model
         'resident_name',     // New field
         'checkin_time',
         'checkout_time',
-        'qr_code_filename', // Add this line to make 'qr_code_filename' mass assignable
-
-        // Do not include '_token' here
+        'qr_code_filename',  // Add this line to make 'qr_code_filename' mass assignable
+        'status',            // Add this line to include the 'status' field
     ];
 }
+
