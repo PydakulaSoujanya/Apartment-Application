@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 @extends('layouts.admin')
 
 @section('content')
@@ -6,10 +7,22 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <h2>Flats List</h2>
+    <!-- <h2>Flats List</h2>
 
-    <a href="{{ route('admin.flatimport.show') }}" class="btn btn-primary mb-3">Upload New Flats</a>
+    <a href="{{ route('admin.flatimport.show') }}" class="btn btn-primary mb-3">Upload New Flats</a> -->
 
+
+ 
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">{{ __('Flats List') }}</h5>
+                    <a href="{{ route('admin.flatimport.show') }}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Upload New Flats
+                    </a>
+                </div>
+                <div class="card-body">
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -45,5 +58,8 @@
             @endforeach
         </tbody>
     </table>
+</div>
+</div>
+</div>
 </div>
 @endsection

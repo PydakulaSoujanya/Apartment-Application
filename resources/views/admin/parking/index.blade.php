@@ -6,10 +6,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-O1QyH37nVBLm8tG0psL94y0W3iJ5j5VhdSjip5hE4i9U1F+N8gEJhTWElKb7kUsD" crossorigin="anonymous">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet"> <!-- Bootstrap Icons -->
-<div class="container">
-    <h2>Parking Information</h2>
-    <a href="{{ route('admin.parking.create') }}" class="btn btn-primary">Add New Parking</a>
-    <table class="table table-striped table-hover mt-4">
+
+    <div class="container">
+    <div class="card mt-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Parking Information</h5>
+            <a href="{{ route('admin.parking.create') }}" class="btn btn-primary">Add New Parking</a> <!-- Link this to your create activity page -->
+        </div>
+        <div class="card-body">
+            <!-- Responsive table wrapper -->
+            <div class="table-responsive">
+                <table class="table table-striped">
         <thead>
             <tr>
                 <th>S.No.</th>
@@ -69,6 +76,8 @@
             @endforeach
         </tbody>
     </table>
+</div>
+</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

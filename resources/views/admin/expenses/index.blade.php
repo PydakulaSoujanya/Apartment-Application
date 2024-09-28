@@ -1,15 +1,22 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 @extends('layouts.admin')
 
 @section('content')
-<div class="container">
-    <h1>Expenses</h1>
 
-    <!-- Button to Add New Expense -->
-    <div class="mb-3">
-        <a href="{{ route('expenses.create') }}" class="btn btn-primary">Add New Expense</a>
-    </div>
 
-    <table class="table table-striped">
+    <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">{{ __('Expenses List') }}</h5>
+                    <a href="{{ route('expenses.create') }}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add New Expense
+                    </a>
+                </div>
+
+                <div class="card-body">
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>ID</th>
@@ -49,5 +56,8 @@
             @endforeach
         </tbody>
     </table>
+                </div>
+</div>
+</div>
 </div>
 @endsection

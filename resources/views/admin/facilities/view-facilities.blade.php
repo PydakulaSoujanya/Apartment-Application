@@ -1,3 +1,5 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 @extends('layouts.admin')
 
 @section('title', 'Facilities List')
@@ -11,15 +13,27 @@
     </div>
     @endif
 
-    <div class="card mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">{{ __('Facilities List') }}</h5>
+                    <a href="{{ route('admin.facilities.create') }}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add New Facility
+                    </a>
+                </div>
+
+    <!-- <div class="card mt-5">
         <div class="d-flex justify-content-between align-items-center">
             <h5 class="mb-0">Facilities List</h5>
             <a href="{{ route('admin.facilities.create') }}" class="btn btn-primary mt-2">Add New Facility</a>
-        </div>
+        </div> -->
+
         <div class="card-body">
         <table class="table table-striped">
                 <thead>
                     <tr>
+                        <th>Sl no</th>
                         <th>Facility Name</th>
                         <th>Start Time</th>
                         <th>End Time</th>
@@ -30,6 +44,7 @@
                 <tbody>
                     @foreach($facilities as $facility)
                         <tr>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $facility->facility_name }}</td>
                             <td>{{ $facility->start_time }}</td>
                             <td>{{ $facility->end_time }}</td>
@@ -42,6 +57,8 @@
           
         </div>
     </div>
+</div>
+</div>
 </div>
 @endsection
 
