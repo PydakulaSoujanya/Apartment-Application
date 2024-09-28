@@ -35,6 +35,8 @@ Route::middleware(['auth', 'user-access:superadmin'])->group(function () {
 
     Route::get('/superadmin/register-admin', [AdminRegisterController::class, 'showRegisteradminForm'])->name('superadmin.register.admin.form');
     Route::post('/superadmin/register-admin', [AdminRegisterController::class, 'registeradmin'])->name('superadmin.register.admin');
+Route::get('/superadmin/admin-list', [AdminRegisterController::class, 'showAdmins'])->name('superadmin.admin.list');
+
 });
   
 Route::get('admin/verify/otp/{id}', [AdminRegisterController::class, 'showOtpForm'])->name('admin.verify.otp.form');
@@ -251,7 +253,8 @@ Route::get('/visitors', [VisitorController::class, 'index'])->name('resident.vis
     Route::put('/visitors/{id}', [VisitorController::class, 'update'])->name('resident.visitors.update');
     Route::delete('/visitors/{id}', [VisitorController::class, 'destroy'])->name('resident.visitors.destroy');
     Route::get('/visitors/{id}', [VisitorController::class, 'show'])->name('resident.visitors.show');
-
+Route::post('/residents/visitors/{id}/approve', [VisitorController::class, 'approve'])->name('resident.visitors.approve');
+Route::post('/residents/visitors/{id}/reject', [VisitorController::class, 'reject'])->name('resident.visitors.reject');
 });
 
 

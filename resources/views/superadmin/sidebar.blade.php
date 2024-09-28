@@ -100,6 +100,12 @@
                             <span class="nav-text">Register New Admin</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('superadmin.admin.list') }}">
+                            <i class="bi bi-person"></i>
+                            <span class="nav-text">Admin List</span>
+                        </a>
+                    </li>
                     <!-- Additional Nav Items Here -->
                 </ul>
 

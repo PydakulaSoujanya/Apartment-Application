@@ -194,12 +194,7 @@ public function paymentstate()
 public function storePayment(Request $request)
 {
     // Validate the incoming request
-    $request->validate([
-        'amount' => 'required|numeric',
-        'payment_date' => 'required|date',
-        'mode_of_payment' => 'required|string',
-    ]);
-
+   
     // Find the authenticated resident
     $resident = ResidentDetail::where('user_id', Auth::id())->first();
 
@@ -207,24 +202,7 @@ public function storePayment(Request $request)
         return redirect()->back()->with('error', 'Resident not found.');
     }
 
-    // Get the latest maintenance charge
-    $latestCharge = MaintenanceCharge::latest()->first();
-
-    if (!$latestCharge) {
-        return redirect()->back()->with('error', 'Maintenance charge not found.');
-    }
-
-    // Calculate the total amount due
-    $area = $resident->area;
-    $amountPerSqFt = $latestCharge->amount_per_sqt;
-    $totalAmountDue = $area * $amountPerSqFt;
-
-    // Check if the paid amount matches the total amount due
-    if ($request->amount != $totalAmountDue) {
-        return redirect()->back()->with('error', 'The amount paid does not match the total amount due.');
-    }
-
-    // Update the resident payment status to "paid" in the resident_details table
+    
     $resident->update([
         'status' => 'paid',
     ]);
@@ -232,30 +210,6 @@ public function storePayment(Request $request)
     // Redirect back with a success message
     return redirect()->route('resident.home')->with('success', 'Payment successful and status updated.');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-    
 
    
 }

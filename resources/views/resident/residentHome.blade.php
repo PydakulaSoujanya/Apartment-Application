@@ -271,7 +271,7 @@
                                 <p><strong>Due Date:</strong> 15-Jul-2024</p>
                             </div>
                             <div class="col-md-3">
-                                <p><strong>Amount:</strong> ₹15,477</p>
+                                <p><strong>Amount:</strong> ₹{{ number_format($totalAmountDue, 2) }}</p>
                             </div>
                         </div>
 

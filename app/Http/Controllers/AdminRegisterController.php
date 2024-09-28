@@ -129,4 +129,9 @@ class AdminRegisterController extends Controller
 
         return redirect()->route('login')->with('status', 'Password set successfully. You can now log in.');
     }
+    public function showAdmins()
+    {
+        $admins = AdminDetail::all();
+        return view('superadmin.admin-list', compact('admins')); // Updated view reference
+    }
 }

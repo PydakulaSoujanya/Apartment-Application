@@ -4,18 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Visitor;
+use App\Models\ResidentDetail;
 use Illuminate\Support\Facades\Auth;
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Writer\PngWriter;
-   use App\Mail\VisitorCreatedMail;
+use App\Mail\VisitorCreatedMail;
 use Illuminate\Support\Facades\Mail;
 
 class VisitorController extends Controller
 {
     public function create()
 {
-    $resident_name = Auth::user()->name; // Assuming the user's name is stored in the 'name' field
-    return view('resident.visitors.create', compact('resident_name'));
+    $resident_name = Auth::user()->name; // User's name from the authenticated user
+    $flat_number = ResidentDetail::where('user_id', Auth::id())->value('flat_number'); // Fetch flat number from ResidentDetail
+
+    return view('resident.visitors.create', compact('resident_name', 'flat_number'));
 }
 
 

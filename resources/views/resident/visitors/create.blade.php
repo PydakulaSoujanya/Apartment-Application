@@ -66,7 +66,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="flat_number">Flat Number</label>
-                        <input type="text" class="form-control" id="flat_number" name="flat_number" required>
+                        <input type="text" class="form-control" id="flat_number" name="flat_number" value="{{ $flat_number }}" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="resident_name">Resident Name</label>
