@@ -12,9 +12,9 @@ class CreateResidentDetailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('admin_id');
-            $table->string('flat_no'); // Correct column name
-            $table->string('floor_no'); // Correct column name
-            $table->string('block_no')->nullable();
+            $table->string('flat_number'); // Correct column name
+            $table->string('floor'); // Correct column name
+            $table->string('block')->nullable();
             $table->string('flat_holder_name')->nullable();
             $table->string('name');
             $table->string('aadhar_no')->nullable();
@@ -22,7 +22,8 @@ class CreateResidentDetailsTable extends Migration
             $table->string('email');
             $table->integer('family_members')->nullable();
             $table->integer('vehicles')->nullable();
-            $table->double('area_sft')->nullable(); // Correct column name
+            $table->double('area')->nullable();
+            $table->string('status')->nullable();; // Correct column name
             $table->string('flat_type')->nullable(); // Flat Type
             $table->timestamps();
 

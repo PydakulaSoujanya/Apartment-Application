@@ -248,13 +248,16 @@
 
 
                     <!-- Tab Contents -->
-                    <div id="dues-content" class="tab-content">
                     <div class="mt-3">
-        <h4 class="mb-0">
-            Amount Due: <span id="amount-due">₹{{ number_format($totalAmountDue, 2) }}</span> 
-            | Accrued Penalty: <span id="accrued-penalty">₹0</span>
-        </h4>
-    </div>
+    <h4 class="mb-0">
+        Amount Due: <span id="amount-due">₹{{ number_format($totalAmountDue, 2) }}</span> 
+    </h4>
+</div>
+
+
+
+
+
 
 
                         <div class="row mt-4">
@@ -273,12 +276,11 @@
                         </div>
 
                         <div class="row mt-4">
-                            <div class="col-md-3">
-                                <!-- <button class="btn btn-primary btn-block">Pay Now</button> -->
-                                <a href="{{ route('maintenance.paymentForm') }}" class="btn btn-primary">Pay Now</a>
+    <div class="col-md-3">
+        <a href="{{ route('maintenance.paymentForm') }}" class="btn btn-primary btn-block">Pay Now</a>
+    </div>
+</div>
 
-                            </div>
-                        </div>
                     </div>
 
                     <div id="history-content" class="tab-content" style="display: none;">

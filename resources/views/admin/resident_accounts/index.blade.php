@@ -22,6 +22,7 @@
                         <th>Area (SFT)</th>
                         <th>Maintenance Charge (Per SFT)</th>
                         <th>Total Maintenance Cost</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -50,18 +51,30 @@
                                 @endif
                             </td>
                             <td>
+    @if (!empty($resident->status) && strtolower($resident->status) == 'paid')
+        <span style="color: green;">{{ ucfirst($resident->status) }}</span>
+    @else
+        <span style="color: red;">Not Paid</span>
+    @endif
+</td>
+
+
+
+<td style="white-space: nowrap;">
     <a href="{{ route('admin.resident.edit', $resident->id) }}" class="btn btn-sm btn-warning d-inline">
         <i class="fas fa-edit"></i> <!-- Edit Icon -->
     </a>
 
-    <form action="{{ route('admin.resident.destroy', $resident->id) }}" method="POST" style="display:inline;">
+    <form action="{{ route('admin.resident.destroy', $resident->id) }}" method="POST" style="display:inline; margin-left: 5px;">
         @csrf
         @method('DELETE')
-        <button type="submit" class="btn btn-sm btn-danger d-inline" onclick="return confirm('Are you sure you want to delete this resident?')">
+        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this resident?')">
             <i class="fas fa-trash"></i> <!-- Delete Icon -->
         </button>
     </form>
 </td>
+
+
 
                         </tr>
                     @endforeach

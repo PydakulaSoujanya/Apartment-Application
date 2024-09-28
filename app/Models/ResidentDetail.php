@@ -24,6 +24,7 @@ class ResidentDetail extends Model
         'family_members',
         'vehicles',
         'area',
+        'status',
     ];
 
     public function user()
