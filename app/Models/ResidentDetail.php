@@ -12,7 +12,7 @@ class ResidentDetail extends Model
     protected $fillable = [
         'user_id',
         'admin_id',
-        'flat_no',
+        'flat_number',
         'floor',
         'block',
         'flat_type',

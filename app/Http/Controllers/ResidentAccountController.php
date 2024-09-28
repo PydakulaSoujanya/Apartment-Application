@@ -137,6 +137,36 @@ class ResidentAccountController extends Controller
 }
 
 
+public function paymentstate()
+{
+    // Get the resident details for the authenticated user
+    $resident = ResidentDetail::where('user_id', Auth::id())->first();
+
+    if (!$resident) {
+        return redirect()->back()->with('error', 'Resident not found.');
+    }
+
+    // Get the latest maintenance charge
+    $latestCharge = MaintenanceCharge::latest()->first();
+
+    if (!$latestCharge) {
+        return redirect()->back()->with('error', 'Maintenance charge not found.');
+    }
+
+    // Calculate total amount due based on the resident's area and the latest charge per sq. ft.
+    $area = $resident->area;
+    $amountPerSqFt = $latestCharge->amount_per_sqt;
+    $totalAmountDue = $area * $amountPerSqFt;
+
+    // Return the view with the resident's details and total amount due
+    return view('resident.maintenance.payment', [
+        'residentDetails' => $resident,
+        'totalAmountDue' => $totalAmountDue,  // Pass the variable here
+    ]);
+}
+
+
+
     public function payment($id)
 {
     $resident = ResidentDetail::find($id);

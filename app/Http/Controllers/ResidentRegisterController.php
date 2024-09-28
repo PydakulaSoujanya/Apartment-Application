@@ -24,22 +24,27 @@ class ResidentRegisterController extends Controller
     // Handle the resident registration process
     public function registerResident(Request $request)
     {
+
+      
         // Validate incoming request data
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'mobile' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+          
             'block' => 'required|string|max:255',
-            'floor_no' => 'required|string|max:255', // Change to floor_no
-            'flat_no' => 'required|string|max:255', // Change to flat_no
+            'floor' => 'required|string|max:255',
+            'flat_number' => 'required|string|max:255',
+            'flat_type' => 'required|string|max:255',
             'flat_holder_name' => 'nullable|string|max:255',
             'aadhar_no' => 'nullable|string|max:255',
             'family_members' => 'nullable|integer',
             'vehicles' => 'nullable|integer',
-            'area_sft' => 'nullable|double', // Change to area_sft
-            'flat_type' => 'nullable|string|max:255',
+            'area' => 'nullable|integer',
+            
         ]);
 
+        // If validation fails, redirect back with errors
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -49,36 +54,36 @@ class ResidentRegisterController extends Controller
             'name' => $request->name,
             'mobile' => $request->mobile,
             'email' => $request->email,
-            'password' => bcrypt('password123'), // Set a default password (change this)
+            'password' => null,
             'type' => 3, // 3 for Resident
         ]);
-
-        // Store the resident details using correct column names
+       
+        // Store the resident details in the ResidentDetail model
         ResidentDetail::create([
             'user_id' => $user->id,
             'admin_id' => Auth::id(),
             'name' => $request->name,
             'mobile' => $request->mobile,
             'email' => $request->email,
-            'flat_no' => $request->flat_no, // Change to flat_no
-            'floor_no' => $request->floor_no, // Change to floor_no
-            'block_no' => $request->block, // Keep as block
+            'flat_number' => $request->flat_number,
+            'floor' => $request->floor,
+            'block' => $request->block,
+            'flat_type' => $request->flat_type,
             'flat_holder_name' => $request->flat_holder_name,
             'aadhar_no' => $request->aadhar_no,
             'family_members' => $request->family_members,
             'vehicles' => $request->vehicles,
-            'area_sft' => $request->area_sft, // Change to area_sft
-            'flat_type' => $request->flat_type,
-            
+            'area' => $request->area,
+            'status' => '',
         ]);
 
-        // Generate and store OTP
-        $otp = rand(100000, 999999);
-        AdminOtp::create([
-            'user_id' => $user->id,
-            'otp' => $otp,
-            'is_used' => false,
-        ]);
+  // Generate and store OTP
+  $otp = rand(100000, 999999);
+  AdminOtp::create([
+      'user_id' => $user->id,
+      'otp' => $otp,
+      'is_used' => false,
+  ]);
 
         // Send OTP email
         Mail::send('emails.admin_otp', ['otp' => $otp, 'url' => route('admin.verify.otp', ['id' => $user->id])], function ($message) use ($request) {

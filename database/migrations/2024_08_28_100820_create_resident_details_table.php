@@ -23,7 +23,7 @@ class CreateResidentDetailsTable extends Migration
             $table->integer('family_members')->nullable();
             $table->integer('vehicles')->nullable();
             $table->double('area')->nullable();
-            $table->string('status')->nullable();; // Correct column name
+            $table->string('status')->nullable()->change(); // Correct column name
             $table->string('flat_type')->nullable(); // Flat Type
             $table->timestamps();
 

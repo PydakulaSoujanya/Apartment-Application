@@ -331,6 +331,7 @@ Route::middleware(['auth', 'user-access:resident'])->group(function () {
     Route::get('/resident/home', [ResidentAccountController::class, 'showResidentHome'])->name('resident.home');
     Route::get('/resident/maintenance/payment-form', [ResidentAccountController::class, 'showResidentPaymentForm'])->name('maintenance.paymentForm');
     Route::post('/resident/maintenance/payment', [ResidentAccountController::class, 'storePayment'])->name('resident.maintenance.pay');
+    Route::get('/resident/maintenance/payment', [ResidentAccountController::class, 'paymentstate'])->name('resident.maintenance.pay');
 });
 
 
