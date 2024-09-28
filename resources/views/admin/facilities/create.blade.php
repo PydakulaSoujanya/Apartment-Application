@@ -20,22 +20,12 @@
             <form action="{{ route('admin.facilities.store') }}" method="POST">
                 @csrf
 
-                <!-- <div class="form-group">
+                <div class="form-group">
                     <label for="facilityName">Facility Name</label>
                     <input type="text" class="form-control" id="facilityName" name="facility_name" placeholder="Enter facility name" required>
-                </div> -->
-
-                <div class="form-group">
-                    <label for="facility">Facility</label>
-                    <!-- <select class="form-control" id="facility" name="facility">
-                        <option value="">Select a facility</option>
-                        @foreach($facilities as $facility)
-                        <option value="{{ $facility->id }}">{{ $facility->facility_name }}</option> <!-- Adjust according to your model -->
-                        @endforeach
-                    </select> -->
-                    <input type="text" class="form-control" id="facility" name="facility" placeholder="Facility Name" required>
-
                 </div>
+
+               
 
                 <!-- <div class="form-group">
     <label for="timeSlot">Time Slot</label>

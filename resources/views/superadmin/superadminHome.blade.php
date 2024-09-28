@@ -208,7 +208,7 @@
                     <div class="super-admin-dashboard-card-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h2>2 cr</h2>
+                                <h2>75000</h2>
                             </div>
                         </div>
                      
