@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ResidentRegisterController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -53,6 +54,8 @@ All Admin Routes List
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
   
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+    Route::get('/admin/home', [ResidentRegisterController::class, 'residentCount'])->name('admin.home');
+
     // Route::get('/income', function () {
     //     return view('admin.Income.residentMaintenance');
     // })->name('income');
@@ -135,7 +138,7 @@ Route::get('/watchman/visitors/create', [WatchmanVisitorController::class, 'crea
 
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ResidentRegisterController;
+
 use App\Http\Controllers\WatchmanRegisterController;
 use App\Http\Controllers\CategoryController;
 

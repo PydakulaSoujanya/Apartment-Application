@@ -175,4 +175,16 @@ public function updateResident(Request $request, $id)
     return redirect()->route('admin.view.residents')->with('status', 'Resident updated successfully.');
 }
 
+
+public function residentCount()
+{
+    // Assuming 'type' = 3 corresponds to the 'Resident' role
+    $residentCount = User::where('type', 3)->count();
+
+    return view('admin.adminHome', [
+        'residentCount' => $residentCount
+    ]);
+}
+
+
 }

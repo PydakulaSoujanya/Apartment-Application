@@ -208,7 +208,7 @@
                 <div class="stat-row">
                     <div>
                         <p class="stat-label">Unique Users</p>
-                        <p class="stat-number">306</p>
+                        <p class="stat-number">{{ $residentCount }}</p>
                     </div>
                     <div>
                         <p class="stat-label">Total Units</p>
