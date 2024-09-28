@@ -174,13 +174,10 @@
                     <div class="super-admin-dashboard-card-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h2>714k</h2>
+                                <h2>10</h2>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <p class="mb-0">+2.6%</p>
-                            <small>Last Week</small>
-                        </div>
+                     
                     </div>
                 </div>
             </div>
@@ -194,13 +191,10 @@
                     <div class="super-admin-dashboard-card-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h2>100</h2>
+                                <h2>5</h2>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <p class="mb-0">-0.1%</p>
-                            <small>Last Week</small>
-                        </div>
+                     
                     </div>
                 </div>
             </div>
@@ -214,13 +208,10 @@
                     <div class="super-admin-dashboard-card-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h2>5 cr</h2>
+                                <h2>2 cr</h2>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <p class="mb-0">+2.8%</p>
-                            <small>Last Week</small>
-                        </div>
+                     
                     </div>
                 </div>
             </div>
@@ -237,10 +228,7 @@
                                 <h2>50k</h2>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <p class="mb-0">+3.6%</p>
-                            <small>Last Week</small>
-                        </div>
+                    
                     </div>
                 </div>
             </div>
