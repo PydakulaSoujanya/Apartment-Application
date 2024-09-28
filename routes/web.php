@@ -116,8 +116,10 @@ Route::middleware(['auth', 'user-access:watchman'])->group(function () {
   
     Route::get('/watchman/home', [HomeController::class, 'watchmanHome'])->name('watchman.home');
     Route::get('/watchman/visitors', [WatchmanVisitorController::class, 'index'])->name('watchman.visitors.index');
+Route::get('/resident-details', [WatchmanVisitorController::class, 'getResidentDetails'])->name('resident.details');
 
-
+Route::get('/watchman/visitors/create', [WatchmanVisitorController::class, 'create'])->name('watchman.visitors.create');
+    Route::post('/watchman/visitors', [WatchmanVisitorController::class, 'store'])->name('visitors.store');
     // Route::post('/watchman/visitor/{id}/checkin', [WatchmanVisitorController::class, 'checkin'])->name('watchman.visitor.checkin.time');
     // Route::post('/watchman/visitor/{id}/checkout', [WatchmanVisitorController::class, 'checkout'])->name('watchman.visitor.checkout.time');
 

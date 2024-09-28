@@ -10,7 +10,14 @@
 @endif
 
 <div class="d-flex justify-content-between align-items-center mb-3">
+    <div style="position: relative;">
     <h2>Help Desk Requests</h2>
+    <!-- Floating Action Button for adding a new request -->
+    <a href="{{ route('submit.request.form') }}" class="btn btn-primary rounded-circle shadow-lg">
+        <i class="fas fa-plus" style="font-size: 1.5rem;"></i>
+    </a>
+</div>
+
     <div class="input-group" style="max-width: 500px;">
         <input type="text" class="form-control" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -74,10 +81,7 @@
 </div>
 @endforeach
 
-<!-- Floating Action Button for adding a new request -->
-<a href="{{ route('submit.request.form') }}" class="btn btn-primary rounded-circle shadow-lg" style="position: fixed; bottom: 20px; right: 20px;">
-    <i class="fas fa-plus" style="font-size: 1.5rem;"></i>
-</a>
+
 
 <!-- FontAwesome Icons -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

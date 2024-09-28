@@ -17,42 +17,69 @@
 
 <!-- Responsive Table -->
 <div class="table-responsive">
+    <a href="{{ route('watchman.visitors.create') }}" class="btn btn-primary">Add Visitor</a>
     <table class="table table-bordered" id="visitorTable">
         <thead>
-            <tr>
-                <th>S No.</th>
-                <th>Flat No.</th>
-                <th>Resident Name</th>
-                <th>Visitor Contact</th>
-                <th>Visiting Reason</th>
-                <th>Visiting Date</th>
-                <th>Expected Timings</th>
-                <th>QR Code</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($visitors as $visitor)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $visitor->flat_number }}</td>
-                <td>{{ $visitor->resident_name }}</td>
-                <td>{{ $visitor->visitor_name }}<br>{{ $visitor->visitor_number }}<br>{{ $visitor->visitor_email }}</td>
-                <td>{{ $visitor->visiting_reason }}</td>
-                <td>{{ \Carbon\Carbon::parse($visitor->visiting_date)->format('d-m-Y') }}</td>
-                <td>{{ $visitor->start_time }} to {{ $visitor->end_time }}</td>
-                <td>
-                    @if($visitor->qr_code_filename)
-                    <img src="{{ asset($visitor->qr_code_filename) }}" alt="QR Code for {{ $visitor->visitor_name }}" style="width: 50px; height: 50px;">
-                    @endif
-                </td>
-                <td>
-                    <button class="btn btn-success btn-sm" onclick="openScanner({{ $visitor->id }})">Check-In</button>
-                    <a href="{{ route('watchman.visitors.checkout', $visitor->id) }}" class="btn btn-danger btn-sm">Check-Out</a>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
+    <tr>
+        <th>S No.</th>
+        <th>Flat No.</th>
+        <th>Resident Name</th>
+        <th>Visitor Contact</th>
+        <th>Visiting Reason</th>
+        <th>Visiting Date</th>
+        <th>IN-OUT</th>
+        <th>Status</th> <!-- New Status column -->
+        <th>Actions</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach($visitors as $visitor)
+    <tr>
+        <td>{{ $loop->iteration }}</td>
+        <td>{{ $visitor->flat_number }}</td>
+        <td>{{ $visitor->resident_name }}</td>
+        <td>{{ $visitor->visitor_name }}<br>{{ $visitor->visitor_number }}<br>{{ $visitor->visitor_email }}</td>
+        <td>{{ $visitor->visiting_reason }}</td>
+        <td>{{ \Carbon\Carbon::parse($visitor->visiting_date)->format('d-m-Y') }}</td>
+
+        <td>
+            @if($visitor->checkin_time)
+                IN: {{ \Carbon\Carbon::parse($visitor->checkin_time)->format('h:i A') }}<br>
+            @else
+                IN: Not Checked In<br>
+            @endif
+
+            @if($visitor->checkout_time)
+                OUT: {{ \Carbon\Carbon::parse($visitor->checkout_time)->format('h:i A') }}
+            @else
+                OUT: Not Checked Out
+            @endif
+        </td>
+
+        <!-- New Status column -->
+        <td>
+            @if($visitor->status === 'approved')
+                <span class="badge bg-success">Approved</span>
+            @elseif($visitor->status === 'rejected')
+                <span class="badge bg-danger">Rejected</span>
+            @else
+                <span class="badge bg-secondary">Pending</span>
+            @endif
+        </td>
+
+        <td>
+            @if(is_null($visitor->checkin_time))
+                <a href="{{ route('watchman.visitors.checkin', $visitor->id) }}" class="btn btn-success btn-sm">Check-In</a>
+            @else
+                <button class="btn btn-success btn-sm" disabled>Checked In</button>
+            @endif
+
+            <a href="{{ route('watchman.visitors.checkout', $visitor->id) }}" class="btn btn-danger btn-sm">Check-Out</a>
+        </td>
+    </tr>
+    @endforeach
+</tbody>
+
     </table>
 </div>
 
@@ -71,45 +98,6 @@
     </div>
   </div>
 </div>
-
-
-
-<script>
-    function openScanner(visitorId) {
-        $('#qrScannerModal').modal('show');
-
-        var html5QrCode = new Html5Qrcode("qr-reader");
-        html5QrCode.start(
-            { facingMode: "environment" },
-            { fps: 10, qrbox: { width: 250, height: 250 } },
-            (decodedText, decodedResult) => {
-                console.log(`Code matched: ${decodedText}`, decodedResult);
-
-                $.ajax({
-                    url: `/watchman/visitors/checkin/${visitorId}`,
-                    method: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        qr_code_data: decodedText
-                    },
-                    success: function(response) {
-                        alert('Visitor checked in successfully!');
-                        $('#qrScannerModal').modal('hide');
-                        html5QrCode.stop();
-                    },
-                    error: function() {
-                        alert('Error during check-in.');
-                    }
-                });
-            },
-            (errorMessage) => {
-                console.error(errorMessage);
-            })
-            .catch((err) => {
-                console.error("Unable to start scanning.", err);
-            });
-    }
-</script>
 
 <script>
 $(document).ready(function() {
@@ -196,8 +184,6 @@ $(document).ready(function() {
         openScanner(visitorId);
     });
 });
-
-
 </script>
 
 @endsection

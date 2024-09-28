@@ -186,41 +186,45 @@
             <div class="table-responsive">
                 <table class="table table-striped table-hover" id="visitorTable">
                     <thead>
-        <tr>
-            <th>Flat No.</th>
-            <th>Visitor Name</th>
-            <th>Visiting Reason</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($visitors as $visitor)
-        <tr>
-            <td>{{ $visitor->flat_number }}</td>
-            <td>{{ $visitor->visitor_name }}</td>
-            <td>{{ $visitor->visiting_reason }}</td>
-            <td>{{ ucfirst($visitor->status) }}</td>
-            <td>
-                @if($visitor->status === 'pending')
-                    <form action="{{ route('resident.visitors.approve', $visitor->id) }}" method="POST" style="display:inline-block;">
-                        @csrf
-                        @method('POST')
-                        <button class="btn btn-success btn-sm">Approve</button>
-                    </form>
-
-                    <form action="{{ route('resident.visitors.reject', $visitor->id) }}" method="POST" style="display:inline-block;">
-                        @csrf
-                        @method('POST')
-                        <button class="btn btn-danger btn-sm">Reject</button>
-                    </form>
-                @else
-                    <span>No action available</span>
-                @endif
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
+                        <tr>
+                            <th>S No.</th>
+                            <th>Flat No.</th>
+                            <th>Resident Name</th>
+                            <th>Visitor contact</th>
+                            <th>Visiting Reason</th>
+                            <th>Visiting Date</th>
+                            <th>Expected Timings</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($visitors as $visitor)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $visitor->flat_number }}</td>
+                                <td>{{ $visitor->resident_name }}</td>
+                                <td>{{ $visitor->visitor_name }}<br>{{ $visitor->visitor_number }}</td>
+                                <td>{{ $visitor->visiting_reason }}</td>
+                                <td>{{ \Carbon\Carbon::parse($visitor->visiting_date)->format('d-m-Y') }}</td>
+                                <td>{{ $visitor->start_time }} to {{ $visitor->end_time }}</td>
+                                <td>
+                                    <a href="{{ route('resident.visitors.show', $visitor->id) }}" class="btn btn-sm icon-btn">
+                                        <i class="fas fa-eye view-icon"></i>
+                                    </a>
+                                    <a href="{{ route('resident.visitors.edit', $visitor->id) }}" class="btn btn-sm icon-btn">
+                                        <i class="fas fa-edit edit-icon"></i>
+                                    </a>
+                                    <form method="POST" action="{{ route('resident.visitors.destroy', $visitor->id) }}" onsubmit="return confirm('Are you sure you want to delete this visitor?')" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm icon-btn">
+                                            <i class="fas fa-trash delete-icon"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
