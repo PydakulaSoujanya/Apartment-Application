@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('mobile');
             $table->string('email');
-            $table->string('qualifiacation');
+            $table->string('qualification');
             $table->string('experience');
             $table->string('aadhar_no');
             $table->string('address');

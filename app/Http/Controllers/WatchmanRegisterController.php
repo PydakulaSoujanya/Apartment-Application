@@ -17,17 +17,15 @@ class WatchmanRegisterController extends Controller
         return view('admin.register_watchman');
     }
 
- 
-
-
     public function registerWatchman(Request $request)
     {
+        // Corrected 'qualification' typo and added validation rules
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'mobile' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
-            'qualifiacation' => 'required|string|max:255',
+            'qualification' => 'required|string|max:255',
             'experience' => 'required|string|max:255',
             'aadhar_no' => 'required|string|max:255',
             'address' => 'required|string|max:255',
@@ -43,23 +41,23 @@ class WatchmanRegisterController extends Controller
             'mobile' => $request->mobile,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'type' => 4, 
+            'type' => 4, // Assuming '4' represents Watchman
         ]);
 
-        // Store the resident details
+        // Store the watchman details
         WatchmanDetail::create([
             'user_id' => $user->id,
             'admin_id' => Auth::id(),
             'name' => $request->name,
             'mobile' => $request->mobile,
             'email' => $request->email,
-            'qualifiacation' => $request->qualifiacation,
+            'qualification' => $request->qualification,
             'experience' => $request->experience,
             'aadhar_no' => $request->aadhar_no,
             'address' => $request->address,
         ]);
 
-        return redirect()->route('admin.view_watchman')->with('status', 'Watchman registered successfully.');
+        return redirect()->route('admin.watchman-list')->with('status', 'Watchman registered successfully.');
     }
 
     public function showWatchmanList()
@@ -92,7 +90,7 @@ public function updateWatchman(Request $request, $id)
         'name' => 'required|string|max:255',
         'mobile' => 'required|string|max:255',
         'email' => 'required|string|email|max:255',
-        'qualifiacation' => 'required|string|max:255',
+        'qualification' => 'required|string|max:255',
         'experience' => 'required|string|max:255',
         'aadhar_no' => 'required|string|max:255',
         'address' => 'required|string|max:255',

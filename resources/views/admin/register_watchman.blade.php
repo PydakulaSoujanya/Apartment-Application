@@ -8,6 +8,7 @@
                 <div class="card-header">Register Watchman</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.register.watchman') }}">
+                        @csrf <!-- Ensure CSRF protection -->
                         <table class="table">
                             <tbody>
                                 <tr>

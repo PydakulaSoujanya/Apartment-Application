@@ -14,7 +14,7 @@ class WatchmanDetail extends Model
         'name',
         'mobile',
         'email',
-        'qualifiacation',
+        'qualification',
         'experience',
         'aadhar_no',
         'address',

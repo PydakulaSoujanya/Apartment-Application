@@ -144,6 +144,17 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WatchmanRegisterController;
 use App\Http\Controllers\CategoryController;
 
+Route::middleware(['auth', 'user-access:admin'])->group(function () {
+    Route::get('/admin/register-watchman', [WatchmanRegisterController::class, 'showRegisterWatchmanForm'])->name('admin.register.watchman.form');
+    Route::post('/admin/register-watchman', [WatchmanRegisterController::class, 'registerWatchman'])->name('admin.register.watchman');
+Route::get('/admin/watchmen', [WatchmanRegisterController::class, 'showWatchmanList'])->name('admin.watchman-list');
+Route::get('/admin/watchmen/{id}', [WatchmanRegisterController::class, 'viewWatchman'])->name('admin.watchman-view');
+Route::get('/admin/watchmen/{id}/edit', [WatchmanRegisterController::class, 'editWatchman'])->name('admin.watchman-edit');
+Route::post('/admin/watchmen/{id}/update', [WatchmanRegisterController::class, 'updateWatchman'])->name('admin.watchman-update');
+Route::delete('/admin/watchmen/{id}', [WatchmanRegisterController::class, 'deleteWatchman'])->name('admin.watchman-delete');
+
+});
+
 
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
@@ -157,13 +168,7 @@ Route::get('admin/resident/{id}', [ResidentRegisterController::class, 'showResid
 Route::get('admin/resident/edit/{id}', [ResidentRegisterController::class, 'editResident'])->name('admin.resident.edit');
 Route::put('admin/resident/update/{id}', [ResidentRegisterController::class, 'updateResident'])->name('admin.resident.update');
 
-    Route::get('/admin/register-watchman', [WatchmanRegisterController::class, 'showRegisterWatchmanForm'])->name('admin.register.watchman.form');
-    Route::post('/admin/register-watchman', [WatchmanRegisterController::class, 'registerWatchman'])->name('admin.register.watchman');
-Route::get('/admin/watchmen', [WatchmanRegisterController::class, 'showWatchmanList'])->name('admin.watchman-list');
-Route::get('/admin/watchmen/{id}', [WatchmanRegisterController::class, 'viewWatchman'])->name('admin.watchman-view');
-Route::get('/admin/watchmen/{id}/edit', [WatchmanRegisterController::class, 'editWatchman'])->name('admin.watchman-edit');
-Route::post('/admin/watchmen/{id}/update', [WatchmanRegisterController::class, 'updateWatchman'])->name('admin.watchman-update');
-Route::delete('/admin/watchmen/{id}', [WatchmanRegisterController::class, 'deleteWatchman'])->name('admin.watchman-delete');
+
 
     Route::get('/admin/users', [AdminController::class, 'showUsers'])->name('admin.show_users');
 
