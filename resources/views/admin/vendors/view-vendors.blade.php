@@ -1,17 +1,29 @@
+@extends('layouts.admin') <!-- Ensure you're extending the correct layout -->
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+@section('content')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-O1QyH37nVBLm8tG0psL94y0W3iJ5j5VhdSjip5hE4i9U1F+N8gEJhTWElKb7kUsD" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet"> <!-- Bootstrap Icons -->
+
+    
 @extends('layouts.admin')
 
 @section('title', 'Vendors')
 
 @section('content')
 
-<div class="vendors-expense-container mt-5">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2>Vendors For Expense</h2>
-        <a href="{{ route('admin.vendors.create') }}" class="btn btn-primary">Add Vendor</a>
-    </div> 
+
+    <div class="container">
+    <div class="card mt-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Vendors For Expense</h5>
+            <a href="{{ route('admin.vendors.create') }}" class="btn btn-primary">Add Vendor</a> 
+        </div>
+        <div class="card-body">
+        <div class="table-responsive">
+
 
     <table id="vendorTable" class="table table-bordered table-striped vendors-expense-dataTable">
         <thead class="vendors-expense-table-light">
@@ -64,7 +76,9 @@
         </tbody>
     </table>
 </div>
-
+</div>
+</div>
+</div>
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Bootstrap JS -->
