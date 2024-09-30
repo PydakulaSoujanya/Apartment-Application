@@ -25,10 +25,17 @@
     }
   </style>
 
-  <div class="container">
-    <h2 class="text-center">Project-1</h2>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-9"> 
+            <div class="card" id="activity-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">{{ __('Project-1') }}</h5>
+                </div>
 
-    <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
+
+
+                <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data" class="p-4 border rounded shadow-sm">
       @csrf  <!-- CSRF token for security -->
 
       <div class="row mb-3">
@@ -114,7 +121,7 @@
       <div class="text-center save-btn">
         <button type="submit" class="btn btn-primary">Save</button>
       </div>
-    </form>
+  </form>
 
     @if ($errors->any())
       <div class="alert alert-danger mt-3">
@@ -125,6 +132,9 @@
         </ul>
       </div>
     @endif
+  </div>
+  </div>
+  </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

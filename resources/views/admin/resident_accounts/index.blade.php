@@ -1,3 +1,10 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-O1QyH37nVBLm8tG0psL94y0W3iJ5j5VhdSjip5hE4i9U1F+N8gEJhTWElKb7kUsD" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet"> <!-- Bootstrap Icons -->
+
 @extends('layouts.admin')
 
 @section('content')
@@ -6,7 +13,14 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        <h1>Resident Details</h1>
+        <!-- <h1> Residents Details</h1> -->
+
+        <div class="container">
+    <div class="card mt-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Residents Details</h5>
+        </div>
+        <div class="card-body">
 
         <!-- Responsive table wrapper -->
         <div class="table-responsive">
@@ -83,5 +97,7 @@
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
         </div> <!-- End responsive table wrapper -->
+    </div>
+    </div>
     </div>
 @endsection

@@ -1,8 +1,15 @@
 @extends('layouts.admin')
 
 @section('content')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha384-O1QyH37nVBLm8tG0psL94y0W3iJ5j5VhdSjip5hE4i9U1F+N8gEJhTWElKb7kUsD" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css" rel="stylesheet"> <!-- Bootstrap Icons -->
+
+   
+   <style>
         .urgent {
             color: red;
         }
@@ -30,22 +37,37 @@
         }
     </style>
 
-    <div class="container my-4">
+
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Open Requests</h5>
+            <a href="{{ route('helpdesk-create') }}" class="btn btn-primary">Add New Parking</a> <!-- Link this to your create activity page -->
+        </div>
+        <div class="card-body">
+            <!-- Responsive table wrapper -->
+          
+
+
+    <!-- <div class="container my-4"> -->
         <!-- Container to hide -->
-        <div id="open-requests-info">
-            <h4 class="text-center">Open Requests</h4>
+        <!-- <div id="open-requests-info">
+            <h4 class="text-center">Open Requests</h4> -->
 
             <!-- Create Request Button -->
-            <div class="d-flex justify-content-end mb-3">
+            <!-- <div class="d-flex justify-content-end mb-3">
                 <a href="{{ route('helpdesk-create') }}" class="btn btn-primary">Create Request</a>
-            </div>
+            </div> -->
 
             <h6><strong>Total Open Requests: 20</strong> | 02-04-2024 to 12-09-2024</h6>
-        </div>
+        <!-- </div> -->
 
         <!-- Request Table -->
+
+        
         <div class="table-responsive" id="request-table">
-        <table class="table table-striped table-hover table-bordered text-center align-middle">
+        <table class="table table-striped">
+        <!-- <table class="table table-striped table-hover table-bordered text-center align-middle"> -->
     <thead>
         <tr>
             <th>Request No.</th>
@@ -176,72 +198,82 @@
 
         <!-- Hidden Form -->
         <div id="request-form" class="hidden">
-            <form>
-                <div class="col-md-12">
-                    <h4 class="text-center mt-3 mb-3">Request Details</h4>
-                    <div class="card">
-                        <div class="card-header">{{ __('Request Details') }}</div>
-                        <div class="card-body">
-                            <div class="row form-row">
-                                <div class="col-md-6">
-                                    <label for="requestNo" class="form-label">Request No:</label>
-                                    <input type="text" class="form-control" id="requestNo" readonly>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="category" class="form-label">Category:</label>
-                                    <input type="text" class="form-control" id="category" readonly>
-                                </div>
-                            </div>
-
-                            <div class="row form-row">
-                                <div class="col-md-6">
-                                    <label for="openedOn" class="form-label">Opened On:</label>
-                                    <input type="text" class="form-control" id="openedOn" readonly>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="serviceDate" class="form-label">Preferred Service Date:</label>
-                                    <input type="text" class="form-control" id="serviceDate" readonly>
-                                </div>
-                            </div>
-
-                            <div class="row form-row">
-                                <div class="col-md-6">
-                                    <label for="unit" class="form-label">Unit:</label>
-                                    <input type="text" class="form-control" id="unit" readonly>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="status" class="form-label">Status:</label>
-                                    <select class="form-select" id="status">
-                                        <option value="Not Started">Not Started</option>
-                                        <option value="In Progress">In Progress</option>
-                                        <option value="Completed">Completed</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row form-row">
-                                <div class="col-md-12">
-                                    <label for="description" class="form-label">Description:</label>
-                                    <textarea class="form-control" id="description" rows="3" readonly></textarea>
-                                </div>
-                            </div>
-
-                            <div class="row form-row">
-                                <div class="col-md-12">
-                                    <label for="comments" class="form-label">Comments:</label>
-                                    <textarea class="form-control" id="comments" rows="3"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-secondary me-2" id="cancel-btn">Cancel</button>
-                                <button type="submit" class="btn btn-primary">Update</button>
-                            </div>
+    <form>
+        <div class="col-md-12">
+            <h4 class="text-center mt-3 mb-3">Request Details</h4>
+            <div class="card">
+                <div class="card-header">{{ __('Request Details') }}</div>
+                <div class="card-body">
+                    <div class="row form-row mb-3">
+                        <label for="requestNo" class="col-md-4 col-form-label text-md-right">Request No:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="requestNo" readonly>
                         </div>
                     </div>
+
+                    <div class="row form-row mb-3">
+                        <label for="category" class="col-md-4 col-form-label text-md-right">Category:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="category" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row form-row mb-3">
+                        <label for="openedOn" class="col-md-4 col-form-label text-md-right">Opened On:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="openedOn" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row form-row mb-3">
+                        <label for="serviceDate" class="col-md-4 col-form-label text-md-right">Preferred Service Date:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="serviceDate" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row form-row mb-3">
+                        <label for="unit" class="col-md-4 col-form-label text-md-right">Unit:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" id="unit" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row form-row mb-3">
+                        <label for="status" class="col-md-4 col-form-label text-md-right">Status:</label>
+                        <div class="col-md-8">
+                            <select class="form-select" id="status">
+                                <option value="Not Started">Not Started</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row form-row mb-3">
+                        <label for="description" class="col-md-4 col-form-label text-md-right">Description:</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" id="description" rows="3" readonly></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row form-row mb-3">
+                        <label for="comments" class="col-md-4 col-form-label text-md-right">Comments:</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" id="comments" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-secondary me-2" id="cancel-btn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
                 </div>
-            </form>
+            </div>
         </div>
+    </form>
+</div>
+
     </div>
 
     <script>
