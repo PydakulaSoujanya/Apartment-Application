@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Projects&Meetings')
+@section('title', 'Projects & Meetings')
 
 @section('content')
   <meta charset="UTF-8">
@@ -13,9 +13,6 @@
     }
     .container {
       margin-top: 30px;
-    }
-    .form-control, .form-select {
-      margin-bottom: 15px;
     }
     .form-label {
       font-weight: bold;
@@ -32,73 +29,103 @@
     <h2 class="text-center">Project-1</h2>
 
     <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf  <!-- CSRF token for security -->
-    
-    <div class="form-group">
-        <label for="category">Category:</label>
-        <input type="text" name="category" id="category" class="form-control" required>
-    </div>
+      @csrf  <!-- CSRF token for security -->
 
-    <div class="form-group">
-        <label for="topic">Topic:</label>
-        <input type="text" name="topic" id="topic" class="form-control" required>
-    </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="category" class="form-label">Category:</label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" name="category" id="category" class="form-control" required>
+        </div>
+      </div>
 
-    <div class="form-group">
-        <label for="status">Status:</label>
-        <select name="status" id="status" class="form-control" required>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="topic" class="form-label">Topic:</label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" name="topic" id="topic" class="form-control" required>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="status" class="form-label">Status:</label>
+        </div>
+        <div class="col-md-8">
+          <select name="status" id="status" class="form-control" required>
             <option value="Open">Open</option>
             <option value="In Progress">In Progress</option>
             <option value="Closed">Closed</option>
-        </select>
-    </div>
+          </select>
+        </div>
+      </div>
 
-    <div class="form-group">
-        <label for="priority">Priority:</label>
-        <select name="priority" id="priority" class="form-control" required>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="priority" class="form-label">Priority:</label>
+        </div>
+        <div class="col-md-8">
+          <select name="priority" id="priority" class="form-control" required>
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
-        </select>
-    </div>
+          </select>
+        </div>
+      </div>
 
-    <div class="form-group">
-        <label for="driven_by">Driven By:</label>
-        <input type="text" name="driven_by" id="driven_by" class="form-control" required>
-    </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="driven_by" class="form-label">Driven By:</label>
+        </div>
+        <div class="col-md-8">
+          <input type="text" name="driven_by" id="driven_by" class="form-control" required>
+        </div>
+      </div>
 
-    <div class="form-group">
-        <label for="target_date">Target Date:</label>
-        <input type="date" name="target_date" id="target_date" class="form-control" required>
-    </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="target_date" class="form-label">Target Date:</label>
+        </div>
+        <div class="col-md-8">
+          <input type="date" name="target_date" id="target_date" class="form-control" required>
+        </div>
+      </div>
 
-    <div class="form-group">
-        <label for="attachment">Attachment:</label>
-        <input type="file" name="attachment" id="attachment" class="form-control">
-    </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="attachment" class="form-label">Attachment:</label>
+        </div>
+        <div class="col-md-8">
+          <input type="file" name="attachment" id="attachment" class="form-control">
+        </div>
+      </div>
 
-    <div class="form-group">
-        <label for="note">Note:</label>
-        <textarea name="note" id="note" class="form-control"></textarea>
-    </div>
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label for="note" class="form-label">Note:</label>
+        </div>
+        <div class="col-md-8">
+          <textarea name="note" id="note" class="form-control" rows="3"></textarea>
+        </div>
+      </div>
 
-    <div class="button-group">
+      <div class="text-center save-btn">
         <button type="submit" class="btn btn-primary">Save</button>
-    </div>
-</form>
+      </div>
+    </form>
 
-  </div>
-  @if ($errors->any())
-    <div class="alert alert-danger">
+    @if ($errors->any())
+      <div class="alert alert-danger mt-3">
         <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
+          @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+          @endforeach
         </ul>
-    </div>
-@endif
-
-
+      </div>
+    @endif
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 @endsection
