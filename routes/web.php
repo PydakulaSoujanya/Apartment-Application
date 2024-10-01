@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResidentRegisterController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\AdminRegisterController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,7 +30,7 @@ All Superadmin Routes List
 --------------------------------------------*/
 
 
-use App\Http\Controllers\AdminRegisterController;
+
 Route::middleware(['auth', 'user-access:superadmin'])->group(function () {
   
     Route::get('/superadmin/home', [HomeController::class, 'superadminHome'])->name('superadmin.home');
@@ -56,7 +58,9 @@ All Admin Routes List
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
   
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
-    Route::get('/admin/home', [ResidentRegisterController::class, 'residentCount'])->name('admin.home');
+    Route::get('/admin/home', [AdminRegisterController::class, 'adminCount'])->name('admin.home');
+
+  
 
     // Route::get('/income', function () {
     //     return view('admin.Income.residentMaintenance');
@@ -142,6 +146,7 @@ Route::get('/watchman/visitors/create', [WatchmanVisitorController::class, 'crea
 use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\WatchmanRegisterController;
+use App\Http\Controllers\SecondaryuserController;
 use App\Http\Controllers\CategoryController;
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
@@ -154,9 +159,17 @@ Route::post('/admin/watchmen/{id}/update', [WatchmanRegisterController::class, '
 Route::delete('/admin/watchmen/{id}', [WatchmanRegisterController::class, 'deleteWatchman'])->name('admin.watchman-delete');
 
 });
+Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
+    Route::get('/admin/register-secondaryuser', [SecondaryuserController::class, 'showRegistersecondaryuserForm'])->name('admin.register.secondaryuser.form');
+    Route::post('/admin/register-secondaryuser', [SecondaryuserController::class, 'registersecondaryuser'])->name('admin.register.secondaryuser');
+Route::get('/admin/secondaryuser', [SecondaryuserController::class, 'showsecondaryuserList'])->name('admin.secondaryuser-list');
+Route::get('/admin/secondaryuser/{id}', [SecondaryuserController::class, 'viewsecondaryuser'])->name('admin.secondaryuser-view');
+Route::get('/admin/secondaryuser/{id}/edit', [SecondaryuserController::class, 'editsecondaryuser'])->name('admin.secondaryuser-edit');
+Route::post('/admin/secondaryuser/{id}/update', [SecondaryuserController::class, 'updatesecondaryuser'])->name('admin.secondaryuser-update');
+Route::delete('/admin/secondaryuser/{id}', [SecondaryuserController::class, 'deletesecondaryuser'])->name('admin.secondaryuser-delete');
 
-
+});
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/register-manager', [AdminController::class, 'showRegisterManagerForm'])->name('admin.register.manager.form');
     Route::post('/admin/register-manager', [AdminController::class, 'registerManager'])->name('admin.register.manager');
@@ -279,7 +292,7 @@ Route::get('/', function () {
 });
 
 
-use App\Http\Controllers\ExpenseController;
+
 
 Route::get('/expenses/create', [ExpenseController::class, 'create'])->name('expenses.create');
 Route::post('/expense', [ExpenseController::class, 'store'])->name('expenses.store');

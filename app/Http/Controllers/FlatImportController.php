@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Flat;
 use App\Imports\FlatsImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+
 
 class FlatImportController extends Controller
 {
@@ -57,4 +59,18 @@ class FlatImportController extends Controller
 
         return redirect()->route('admin.flatimport.index')->with('success', 'Flat deleted successfully.');
     }
+
+
+
+    public function flatCount()
+    {
+        // Count all entries in the 'flats' table
+        $flatCount = Flat::count();
+
+        return view('admin.adminHome', [
+            'flatCount' => $flatCount
+        ]);
+    }
+    
+
 }

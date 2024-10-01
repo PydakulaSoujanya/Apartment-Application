@@ -6,8 +6,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+use App\Models\Flat;
+use App\Models\Expense;
 use App\Models\AdminDetail;
 use App\Models\AdminOtp;
+
 
 class AdminRegisterController extends Controller
 {
@@ -134,4 +137,34 @@ class AdminRegisterController extends Controller
         $admins = AdminDetail::all();
         return view('superadmin.admin-list', compact('admins')); // Updated view reference
     }
+
+
+
+
+
+    public function adminCount()
+{
+     // Fetch resident count
+     $residentCount = User::where('type', 3)->count();
+
+     // Fetch total expenses
+     $totalExpenses = Expense::sum('amount');
+ 
+     // Fetch expenses per month (for monthly display)
+     $monthlyExpenses = Expense::selectRaw('MONTH(paid_date) as month, SUM(amount) as total')
+         ->groupByRaw('MONTH(paid_date)')
+         ->get();
+ 
+     // Fetch flat count
+     $flatCount = Flat::count();
+ 
+     // Return the view with all the data
+     return view('admin.adminHome', [
+         'residentCount' => $residentCount,
+         'totalExpenses' => $totalExpenses,
+         'monthlyExpenses' => $monthlyExpenses,
+         'flatCount' => $flatCount
+     ]);
+}
+
 }

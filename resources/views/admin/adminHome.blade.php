@@ -209,10 +209,12 @@
                     <div>
                         <p class="stat-label">Unique Users</p>
                         <p class="stat-number">{{ $residentCount }}</p>
+
                     </div>
                     <div>
-                        <p class="stat-label">Total Units</p>
-                        <p class="stat-number">190</p>
+                    <p class="stat-label">Total Flats</p>
+    <p class="stat-number">{{ $flatCount }}</p>
+
                     </div>
                 </div>
                 <p class="section-content">
@@ -265,22 +267,24 @@
 
         <!-- Expense Tracker -->
         <div class="col-md-4 col-lg-6">
-            <div class="card p-4">
-                <h5 class="dashboard-title">Expense Tracker</h5>
-                <input type="text" id="expenseDateRange" class="form-control mb-3" placeholder="Select Date Range">
-                <div class="chart-container">
-                    <canvas id="expenseBarChart"></canvas>
-                </div>
-                <div class="text-center mt-3">
-                    <h4 class="stat-number text-red">₹32,88,436.45</h4>
-                    <p class="stat-label">Total Expenses</p>
-                </div>
-                <p class="section-content text-center">
-                    Jan ₹6000 &nbsp; | &nbsp; Feb ₹5000 &nbsp; | &nbsp; Mar ₹5500 &nbsp; | &nbsp; Apr ₹4500 &nbsp; | &nbsp; May ₹6000 &nbsp; | &nbsp; Jun ₹5000 &nbsp; | &nbsp; Jul ₹5500 &nbsp; | &nbsp; Aug ₹5300 &nbsp; | &nbsp; Sep ₹6000 &nbsp; | &nbsp; Oct ₹5200 &nbsp; | &nbsp; Nov ₹5500 &nbsp; | &nbsp; Dec ₹5800
-                </p>
-            </div>
+    <div class="card p-4">
+        <h5 class="dashboard-title">Expense Tracker</h5>
+        <input type="text" id="expenseDateRange" class="form-control mb-3" placeholder="Select Date Range">
+        <div class="chart-container">
+            <canvas id="expenseBarChart"></canvas>
         </div>
+        <div class="text-center mt-3">
+            <h4 class="stat-number text-red">₹{{ number_format($totalExpenses, 2) }}</h4> <!-- Dynamic total expenses -->
+            <p class="stat-label">Total Expenses</p>
+        </div>
+        <p class="section-content text-center">
+            @foreach ($monthlyExpenses as $expense)
+                {{ date("M", mktime(0, 0, 0, $expense->month, 1)) }} ₹{{ number_format($expense->total, 2) }} &nbsp; | &nbsp;
+            @endforeach
+        </p>
     </div>
+</div>
+    
     
     <!-- Chart.js Library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
