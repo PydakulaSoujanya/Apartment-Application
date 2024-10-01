@@ -58,7 +58,7 @@
     <i class="fas fa-edit"></i> <!-- Edit Icon -->
 </a>
 
-                                    <form method="POST" action="#" onsubmit="return confirm('Are you sure you want to delete this resident?')" style="display:inline;">
+                                    <form  action="{{ route('admin.view.deleteresidents', $resident->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this resident?')" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger" title="Delete">

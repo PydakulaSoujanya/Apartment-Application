@@ -24,14 +24,11 @@ class ResidentRegisterController extends Controller
     // Handle the resident registration process
     public function registerResident(Request $request)
     {
-
-      
         // Validate incoming request data
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'mobile' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-          
             'block' => 'required|string|max:255',
             'floor' => 'required|string|max:255',
             'flat_number' => 'required|string|max:255',
@@ -41,27 +38,31 @@ class ResidentRegisterController extends Controller
             'family_members' => 'nullable|integer',
             'vehicles' => 'nullable|integer',
             'area' => 'nullable|integer',
-            
         ]);
-
+    
         // If validation fails, redirect back with errors
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
+    
+        // Retrieve apart_id from the authenticated user
+        $apartId = Auth::user()->apart_id;
+    
         // Create a new user for the resident
         $user = User::create([
             'name' => $request->name,
             'mobile' => $request->mobile,
             'email' => $request->email,
             'password' => null,
+            'apart_id' => $apartId,
             'type' => 3, // 3 for Resident
         ]);
-       
+    
         // Store the resident details in the ResidentDetail model
         ResidentDetail::create([
             'user_id' => $user->id,
             'admin_id' => Auth::id(),
+            'apart_id' => $apartId,
             'name' => $request->name,
             'mobile' => $request->mobile,
             'email' => $request->email,
@@ -190,6 +191,30 @@ public function residentCount()
         'residentCount' => $residentCount
     ]);
 }
+
+public function residentDelete($id)
+{
+    // Find the resident's details by their user_id (the $id parameter here is the user ID)
+    $residentDetail = ResidentDetail::where('user_id', $id)->first();
+
+    if (!$residentDetail) {
+        return redirect()->back()->with('error', 'Resident not found');
+    }
+
+    // Delete the resident details
+    $residentDetail->delete();
+
+    // Find and delete the corresponding user (resident)
+    $user = User::find($id);
+
+    if ($user) {
+        $user->delete();
+    }
+
+    // Redirect back with success message
+    return redirect()->route('admin.view.residents')->with('success', 'Resident deleted successfully');
+}
+
 
 
 }

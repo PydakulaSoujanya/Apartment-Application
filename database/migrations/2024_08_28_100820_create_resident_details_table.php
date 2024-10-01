@@ -12,6 +12,7 @@ class CreateResidentDetailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('admin_id');
+            $table->string('apart_id');
             $table->string('flat_number'); // Correct column name
             $table->string('floor'); // Correct column name
             $table->string('block')->nullable();

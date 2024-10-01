@@ -10,6 +10,7 @@ class AdminDetail extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
+        'apart_id',
         'name',
         'mobile',
         'email',
