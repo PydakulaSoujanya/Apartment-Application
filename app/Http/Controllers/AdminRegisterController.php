@@ -158,47 +158,40 @@ class AdminRegisterController extends Controller
 
 
     public function adminCount()
-{
-     // Fetch resident count
-     $residentCount = User::where('type', 3)->count();
-
-     // Fetch total expenses
-     $totalExpenses = Expense::sum('amount');
- 
-     // Fetch expenses per month (for monthly display)
-     $monthlyExpenses = Expense::selectRaw('MONTH(paid_date) as month, SUM(amount) as total')
-         ->groupByRaw('MONTH(paid_date)')
-         ->get();
- 
-     // Fetch flat count
-     $flatCount = Flat::count();
- 
-     // Return the view with all the data
-     return view('admin.adminHome', [
-         'residentCount' => $residentCount,
-         'totalExpenses' => $totalExpenses,
-         'monthlyExpenses' => $monthlyExpenses,
-         'flatCount' => $flatCount
-     ]);
-}
-
-public function adminIncome()
-{
-    // Fetch total income using the MaintenancePayment model
-    $totalIncome = MaintenancePayment::sum('amount');
-
-    // Fetch income per month (grouped by month)
-    $monthlyIncome = MaintenancePayment::selectRaw('MONTH(payment_date) as month, SUM(amount) as total')
-        ->groupByRaw('MONTH(payment_date)')
-        ->get();
-
-    // Return the view with the income data
-    return view('admin.adminHome', [
-        'totalIncome' => $totalIncome,
-        'monthlyIncome' => $monthlyIncome
-    ]);
-}
-
+    {
+        // Fetch resident count
+        $residentCount = User::where('type', 3)->count();
+    
+        // Fetch total expenses
+        $totalExpenses = Expense::sum('amount');
+     
+        // Fetch expenses per month (for monthly display)
+        $monthlyExpenses = Expense::selectRaw('MONTH(paid_date) as month, SUM(amount) as total')
+            ->groupByRaw('MONTH(paid_date)')
+            ->get();
+    
+        // Fetch flat count
+        $flatCount = Flat::count();
+    
+        // Fetch total income
+        $totalIncome = MaintenancePayment::sum('amount');
+    
+        // Fetch income per month (grouped by month)
+        $monthlyIncome = MaintenancePayment::selectRaw('MONTH(payment_date) as month, SUM(amount) as total')
+            ->groupByRaw('MONTH(payment_date)')
+            ->get();
+    
+        // Return the view with all the data
+        return view('admin.adminHome', [
+            'residentCount' => $residentCount,
+            'totalExpenses' => $totalExpenses,
+            'monthlyExpenses' => $monthlyExpenses,
+            'flatCount' => $flatCount,
+            'totalIncome' => $totalIncome,
+            'monthlyIncome' => $monthlyIncome
+        ]);
+    }
+    
 
 
 

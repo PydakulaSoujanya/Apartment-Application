@@ -61,7 +61,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
   
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
     Route::get('/admin/home', [AdminRegisterController::class, 'adminCount'])->name('admin.home');
-    Route::get('/admin/income', [MaintenanceController::class, 'getIncomeData'])->name('admin.income');
+   
 
 
 
