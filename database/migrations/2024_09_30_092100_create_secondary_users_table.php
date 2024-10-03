@@ -11,27 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-       
-
-        Schema::create('admin_details', function (Blueprint $table) {
+        Schema::create('secondary_users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('apart_id');
+            $table->unsignedBigInteger('admin_id');  
             $table->string('name');
             $table->string('mobile');
             $table->string('email');
-            $table->string('city');
-            $table->string('state');
-            $table->string('country');
-            $table->string('pincode');
-            $table->string('apartment_name');
-            $table->string('apartment_purpose'); // Added this line
-            $table->string('apartment_address');
+            $table->string('qualification');
+            $table->string('experience');
+            $table->string('aadhar_no');
+            $table->string('address');
             $table->timestamps();
-        
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
         });
-        
     }
 
     /**
@@ -39,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('admin_details');
+        Schema::dropIfExists('secondary_users');
     }
 };

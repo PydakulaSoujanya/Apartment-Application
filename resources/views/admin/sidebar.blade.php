@@ -137,6 +137,13 @@
             <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
     </li>
+    <li class="nav-item">   
+        <a class="nav-link" href="{{ route('admin.secondaryuser-list') }}">
+            <i class="bi bi-person-badge"></i>
+            <span class="nav-text">SecondaryUser</span>
+            <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
+        </a>
+    </li>
 
     <li class="nav-item">   
         <a class="nav-link" href="{{ route('admin.helpdesk.opendesk') }}">

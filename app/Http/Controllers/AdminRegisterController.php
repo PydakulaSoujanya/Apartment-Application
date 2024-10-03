@@ -34,21 +34,34 @@ class AdminRegisterController extends Controller
             'apartment_purpose' => 'required|string|in:Industry,Home,Apartment',
             'apartment_address' => 'required|string|max:255',
         ]);
-
+    
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
+    
+        // Fetch the highest apart_id from AdminDetail and increment it
+        $lastApartId = AdminDetail::orderBy('apart_id', 'desc')->value('apart_id');
+    
+        if ($lastApartId) {
+            // Extract the numeric part of apart_id and increment it
+            $newApartIdNumber = intval(substr($lastApartId, 6)) + 1;
+            $newApartId = 'apart_' . str_pad($newApartIdNumber, 2, '0', STR_PAD_LEFT);
+        } else {
+            // If no records exist, start with apart_01
+            $newApartId = 'apart_01';
+        }
+    
         // Create a new user without a password
         $user = User::create([
             'name' => $request->name,
             'mobile' => $request->mobile,
             'email' => $request->email,
-           'password' => null,
+            'password' => null,
             'type' => 1, // 1 for Admin
+            'apart_id' => $newApartId, // Store apart_id in the user table
         ]);
-
-        // Store the admin details
+    
+        // Store the admin details along with apart_id
         AdminDetail::create([
             'user_id' => $user->id,
             'name' => $request->name,
@@ -61,6 +74,7 @@ class AdminRegisterController extends Controller
             'apartment_name' => $request->apartment_name,
             'apartment_purpose' => $request->apartment_purpose,
             'apartment_address' => $request->apartment_address,
+            'apart_id' => $newApartId, // Store apart_id in the admin details table
         ]);
 
         // Generate and store OTP

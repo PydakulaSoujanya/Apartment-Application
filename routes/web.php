@@ -182,6 +182,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/register-resident', [ResidentRegisterController::class, 'showRegisterResidentForm'])->name('admin.register.resident.form');
     Route::post('/admin/register-resident', [ResidentRegisterController::class, 'registerResident'])->name('admin.register.resident');
 Route::get('admin/view-residents', [ResidentRegisterController::class, 'viewResidents'])->name('admin.view.residents');
+Route::delete('admin/view-residents/{id}', [ResidentRegisterController::class, 'residentDelete'])->name('admin.view.deleteresidents');
+
 Route::get('admin/resident/{id}', [ResidentRegisterController::class, 'showResident'])->name('admin.resident.show');
 Route::get('admin/resident/edit/{id}', [ResidentRegisterController::class, 'editResident'])->name('admin.resident.edit');
 Route::put('admin/resident/update/{id}', [ResidentRegisterController::class, 'updateResident'])->name('admin.resident.update');

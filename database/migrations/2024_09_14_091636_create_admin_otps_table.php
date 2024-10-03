@@ -13,7 +13,7 @@ class CreateAdminOtpsTable extends Migration
     {
         Schema::create('admin_otps', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('otp');
             $table->boolean('is_used')->default(false);
             $table->timestamps();
