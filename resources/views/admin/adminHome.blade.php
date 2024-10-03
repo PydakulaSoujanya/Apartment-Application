@@ -248,22 +248,25 @@
     <h2 class="accounting-header">Accounting</h2>
     <div class="row equal-height">
         <!-- Income Tracker -->
-        <div class="col-md-4 col-lg-6">
-            <div class="card p-4">
-                <h5 class="dashboard-title">Income Tracker</h5>
-                <input type="text" id="incomeDateRange" class="form-control mb-3" placeholder="Select Date Range">
-                <div class="chart-container">
-                    <canvas id="incomePieChart"></canvas>
-                </div>
-                <div class="text-center mt-3">
-                    <h4 class="stat-number text-green">₹25,20,179.00</h4>
-                    <p class="stat-label">Balance Amount</p>
-                </div>
-                <p class="section-content text-center">
-                    Jan ₹5000 &nbsp; | &nbsp; Feb ₹3000 &nbsp; | &nbsp; Mar ₹4000 &nbsp; | &nbsp; Apr ₹2000 &nbsp; | &nbsp; May ₹3000 &nbsp; | &nbsp; Jun ₹2500 &nbsp; | &nbsp; Jul ₹4000 &nbsp; | &nbsp; Aug ₹3500 &nbsp; | &nbsp; Sep ₹4200 &nbsp; | &nbsp; Oct ₹3000 &nbsp; | &nbsp; Nov ₹3200 &nbsp; | &nbsp; Dec ₹3700
-                </p>
-            </div>
-        </div>
+        <div class="card p-4">
+    <h5 class="dashboard-title">Income Tracker</h5>
+    <input type="text" id="incomeDateRange" class="form-control mb-3" placeholder="Select Date Range">
+    <div class="chart-container">
+        <canvas id="incomePieChart"></canvas>
+    </div>
+    <div class="text-center mt-3">
+        <h4 class="stat-number text-green">₹{{ number_format($totalIncome, 2) }}</h4> <!-- Display total income -->
+        <p class="stat-label">Balance Amount</p>
+    </div>
+    <p class="section-content text-center">
+        @foreach ($monthlyIncome as $income)
+            {{ date("M", mktime(0, 0, 0, $income->month, 1)) }} ₹{{ number_format($income->total, 2) }} &nbsp; | &nbsp;
+        @endforeach
+    </p>
+</div>
+
+
+
 
         <!-- Expense Tracker -->
         <div class="col-md-4 col-lg-6">
@@ -284,7 +287,7 @@
         </p>
     </div>
 </div>
-    
+</div>
     
     <!-- Chart.js Library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

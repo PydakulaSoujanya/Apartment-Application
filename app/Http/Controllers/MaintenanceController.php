@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\MaintenancePayment;
 use App\Models\ResidentDetail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MaintenanceController extends Controller
 {
@@ -81,5 +82,24 @@ class MaintenanceController extends Controller
         'residentDetails' => $residentDetails
     ]);
 }
+
+// public function getIncomeData()
+// {
+//     // Fetch total income
+//     $totalIncome = DB::table('maintenance_payments')->sum('amount');
+    
+//     // Fetch income per month
+//     $monthlyIncome = DB::table('maintenance_payments')
+//         ->select(DB::raw('MONTH(payment_date) as month'), DB::raw('SUM(amount) as total'))
+//         ->groupBy(DB::raw('MONTH(payment_date)'))
+//         ->get();
+
+//     // Debugging output
+//     dd($totalIncome, $monthlyIncome);
+
+//     return view('admin.adminHome', compact('totalIncome', 'monthlyIncome'));
+// }
+
+
 
 }

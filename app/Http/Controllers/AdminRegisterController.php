@@ -10,6 +10,7 @@ use App\Models\Flat;
 use App\Models\Expense;
 use App\Models\AdminDetail;
 use App\Models\AdminOtp;
+use App\Models\MaintenancePayment; 
 
 
 class AdminRegisterController extends Controller
@@ -166,5 +167,25 @@ class AdminRegisterController extends Controller
          'flatCount' => $flatCount
      ]);
 }
+
+public function adminIncome()
+{
+    // Fetch total income using the MaintenancePayment model
+    $totalIncome = MaintenancePayment::sum('amount');
+
+    // Fetch income per month (grouped by month)
+    $monthlyIncome = MaintenancePayment::selectRaw('MONTH(payment_date) as month, SUM(amount) as total')
+        ->groupByRaw('MONTH(payment_date)')
+        ->get();
+
+    // Return the view with the income data
+    return view('admin.adminHome', [
+        'totalIncome' => $totalIncome,
+        'monthlyIncome' => $monthlyIncome
+    ]);
+}
+
+
+
 
 }

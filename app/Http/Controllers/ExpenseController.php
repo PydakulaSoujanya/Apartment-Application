@@ -121,22 +121,22 @@ class ExpenseController extends Controller
     }
 
     // Add the getExpenses function here to fetch total and monthly expenses
-    public function getExpenses()
-    {
-        // Fetch total expenses
-        $totalExpenses = DB::table('expenses')->sum('amount');
+    // public function getExpenses()
+    // {
+        
+    //     $totalExpenses = DB::table('expenses')->sum('amount');
     
-        // Fetch expenses per month (for monthly display)
-        $monthlyExpenses = DB::table('expenses')
-            ->select(DB::raw('MONTH(paid_date) as month'), DB::raw('SUM(amount) as total'))
-            ->groupBy(DB::raw('MONTH(paid_date)'))
-            ->get();
+  
+    //     $monthlyExpenses = DB::table('expenses')
+    //         ->select(DB::raw('MONTH(paid_date) as month'), DB::raw('SUM(amount) as total'))
+    //         ->groupBy(DB::raw('MONTH(paid_date)'))
+    //         ->get();
     
-        // Return the view with the data
-        return view('admin.adminHome', [
-            'totalExpenses' => $totalExpenses,
-            'monthlyExpenses' => $monthlyExpenses
-        ]);
-    }
+    
+    //     return view('admin.adminHome', [
+    //         'totalExpenses' => $totalExpenses,
+    //         'monthlyExpenses' => $monthlyExpenses
+    //     ]);
+    // }
     
 }

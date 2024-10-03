@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResidentRegisterController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\AdminRegisterController;
+use App\Http\Controllers\MaintenanceController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -59,6 +61,9 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
   
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
     Route::get('/admin/home', [AdminRegisterController::class, 'adminCount'])->name('admin.home');
+    Route::get('/admin/income', [MaintenanceController::class, 'getIncomeData'])->name('admin.income');
+
+
 
   
 
@@ -508,8 +513,10 @@ Route::get('/resident/profile/test', [ResidentController::class, 'test'])->name(
 
 Route::get('/resident/{id}', [ResidentController::class, 'show'])->name('resident.show');
 
-use App\Http\Controllers\MaintenanceController;
+// use App\Http\Controllers\MaintenanceController;
 
+
+// Routes for maintenance payment
 Route::get('/maintenance-payment', [MaintenanceController::class, 'showPaymentForm'])->name('maintenance.paymentForm');
 Route::post('/maintenance-payment', [MaintenanceController::class, 'processPayment'])->name('maintenance.processPayment');
 
