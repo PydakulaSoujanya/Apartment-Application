@@ -427,9 +427,9 @@ Route::delete('/requests/{id}', [HelpDeskController::class, 'destroy'])->name('r
 Route::get('/resident/moderate-forum', function () {
     return view('resident.moderate-forum.moderate-forum');
 })->name('resident.moderate-forum.moderate-forum');
-use App\Http\Controllers\ParkingSlotController;
+// use App\Http\Controllers\ParkingSlotController;
 
-Route::get('/admin/parking-slot', [ParkingSlotController::class, 'index'])->name('admin.parking-slot.index');
+// Route::get('/admin/parking-slot', [ParkingSlotController::class, 'index'])->name('admin.parking-slot.index');
 
 use App\Http\Controllers\StaffController;
 
@@ -547,3 +547,30 @@ Route::get('/admin/parking/create', [ParkingController::class, 'create'])->name(
 Route::get('/admin/parking/{parking}/edit', [ParkingController::class, 'edit'])->name('admin.parking.edit');
 Route::get('/admin/parking/{parking}', [ParkingController::class, 'show'])->name('admin.parking.show');
 Route::delete('/admin/parking/{parking}', [ParkingController::class, 'destroy'])->name('admin.parking.destroy');
+
+use App\Http\Controllers\MeetingController;
+
+Route::prefix('admin')->group(function () {
+    Route::get('/meetings', [MeetingController::class, 'index'])->name('admin.meetings.index'); // Show all meetings
+    Route::get('/meetings/create', [MeetingController::class, 'create'])->name('admin.meetings.create'); // Show form to create a meeting
+    Route::post('/meetings/store', [MeetingController::class, 'store'])->name('admin.meetings.store'); // Handle form submission to store a meeting
+    Route::get('/meetings/{id}', [MeetingController::class, 'show'])->name('admin.meetings.show'); // Show details of a specific meeting
+    Route::get('/meetings/{id}/edit', [MeetingController::class, 'edit'])->name('admin.meetings.edit'); // Show form to edit a meeting
+    Route::put('/meetings/{id}', [MeetingController::class, 'update'])->name('admin.meetings.update'); // Handle form submission to update a meeting
+    Route::delete('/meetings/{id}', [MeetingController::class, 'destroy'])->name('admin.meetings.destroy'); // Delete a meeting
+});
+
+use App\Http\Controllers\ParkingSlotController;
+
+Route::prefix('admin')->group(function () {
+    // Parking Slot Routes
+    Route::get('/parking_slot', [ParkingSlotController::class, 'index'])->name('admin.parking_slot.index'); // Show all parking slots
+    Route::get('/parking_slot/create', [ParkingSlotController::class, 'create'])->name('admin.parking_slot.create'); // Show form to create a new parking slot
+    Route::post('/parking_slot/store', [ParkingSlotController::class, 'store'])->name('admin.parking_slot.store'); // Store the new parking slot
+    Route::get('/parking_slot/{id}/edit', [ParkingSlotController::class, 'edit'])->name('admin.parking_slot.edit'); // Show form to edit parking slot
+    Route::put('/parking_slot/{id}', [ParkingSlotController::class, 'update'])->name('admin.parking_slot.update'); // Update the parking slot
+    Route::delete('/parking_slot/{id}', [ParkingSlotController::class, 'destroy'])->name('admin.parking_slot.destroy'); // Delete a parking slot
+});
+
+
+

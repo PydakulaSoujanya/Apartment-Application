@@ -10,6 +10,21 @@
                 <div class="card-body">
                     <form action="{{ route('expenses.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                         <!-- Vendor Name -->
+                         <div class="form-group row mb-3">
+    <label for="vendor_name" class="col-md-4 col-form-label text-md-right">{{ __('Vendor Name') }}</label>
+    <div class="col-md-8">
+        <select name="vendor_name" class="form-control" required>
+            <option value="" disabled selected>Select Vendor</option>
+            @foreach($vendors as $vendor)
+                <option value="{{ $vendor->id }}">{{ $vendor->vendor_name }}</option>
+            @endforeach
+        </select>
+    </div>
+</div>
+
+
+
                         <!-- Category -->
                         <div class="form-group row mb-3">
                             <label for="category" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>

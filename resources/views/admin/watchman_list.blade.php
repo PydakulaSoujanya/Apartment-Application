@@ -39,7 +39,7 @@
                         <td>{{ $watchman->name }}</td>
                         <td>{{ $watchman->mobile }}</td>
                         <td>{{ $watchman->email }}</td>
-                        <td>{{ $watchman->qualifiacation }}</td>
+                        <td>{{ $watchman->qualification }}</td>
                         <td>{{ $watchman->experience }}</td>
                         <td>{{ $watchman->aadhar_no }}</td>
                         <td>{{ $watchman->address }}</td>

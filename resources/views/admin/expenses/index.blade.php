@@ -14,6 +14,7 @@
                 </div>
 
                 <div class="card-body">
+<<<<<<< HEAD
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -44,6 +45,40 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('expenses.edit', $expense->id) }}" class="btn btn-warning btn-sm">Edit</a>
+=======
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Vendor Name</th>
+
+                <th>Category</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Paid Date</th>
+                <th>File</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($expenses as $expense)
+            <tr>
+                <td>{{ $expense->id }}</td>
+                <td>{{ $expense->vendor->vendor_name ?? 'No Vendor' }}</td>  <!-- Fetch vendor_name, or 'No Vendor' if null -->
+                <td>{{ $expense->category }}</td>
+                <td>{{ $expense->description }}</td>
+                <td>{{ $expense->amount }}</td>
+                <td>{{ $expense->paid_date }}</td>
+                <td>
+                    @if($expense->file_path)
+                    <a href="{{ asset('expenses/' . $expense->file_path) }}" target="_blank">View File</a>
+                    @else
+                        No file uploaded
+                    @endif
+                </td>
+                <td>
+                    <a href="{{ route('expenses.edit', $expense->id) }}" class="btn btn-warning btn-sm">Edit</a>
+>>>>>>> 748d9e32700af7bb4b9e852e5f556a2ad6502a85
 
                                     <form action="{{ route('expenses.destroy', $expense->id) }}" method="POST" style="display:inline-block;">
                                         @csrf

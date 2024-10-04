@@ -46,7 +46,7 @@
                                 <tr>
                                     <td><label for="qualification" class="form-label">Education Qualification</label></td>
                                     <td>
-                                        <input id="qualification" type="text" class="form-control" name="qualification" value="{{ $watchman->qualifiacation }}" required>
+                                        <input id="qualification" type="text" class="form-control" name="qualification" value="{{ $watchman->qualification }}" required>
                                     </td>
                                 </tr>
                                 <tr>

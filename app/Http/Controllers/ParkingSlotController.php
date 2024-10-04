@@ -2,56 +2,59 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Vehicle; // Ensure you import the Vehicle model
+use App\Models\ParkingSlot;
 use Illuminate\Http\Request;
 
 class ParkingSlotController extends Controller
 {
-    // Display the list of parking slots/vehicles
     public function index()
     {
-        // Fetch all vehicles and pass them to the index view
-        $vehicles = Vehicle::all();
-        return view('admin.parking-slot.index', compact('vehicles'));
+        $slots = ParkingSlot::all();
+        return view('admin.parking_slot.index', compact('slots'));
     }
 
-    // Show the form for adding a vehicle
-    public function showVehicleForm()
+    public function create()
     {
-        return view('admin.parking-slot.vehicle-form');
+        return view('admin.parking_slot.create');
     }
 
-    // Store vehicle data into the database
-public function storeVehicle(Request $request)
-{
-    // Validate the incoming request
-    $validatedData = $request->validate([
-        'slotNo' => 'required|integer',
-        'slotName' => 'required|string|max:255',
-        'slotType' => 'required|string|max:255',
-        'block' => 'required|string|max:255',
-        'unitNo' => 'required|integer',
-        'status' => 'required|string|max:255',
-        'name' => 'required|string|max:255',
-        'vehicleNo' => 'required|string|max:255',
-        'vehicleType' => 'required|string|max:255',
-        'rfidNo' => 'nullable|string|max:255',
-        'fromDate' => 'required|date',
-        'toDate' => 'nullable|date',
-        'additionalField' => 'nullable|string|max:255',
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'slot_no' => 'required',
+            'type' => 'required',
+            'block' => 'nullable|string',
+            'status' => 'required|boolean',
+        ]);
 
-    // Attempt to store the validated data
-    try {
-        Vehicle::create($validatedData);
-        return redirect()->route('admin.parking-slot.index')
-                         ->with('success', 'Vehicle added successfully!');
-    } catch (\Exception $e) {
-        // Log the error and redirect with an error message
-        \Log::error('Error storing vehicle: ' . $e->getMessage());
-        return redirect()->back()->with('error', 'Failed to add vehicle. Please try again.');
+        ParkingSlot::create($request->all());
+
+        return redirect()->route('admin.parking_slot.index')->with('success', 'Parking Slot added successfully.');
     }
-}
 
+    public function edit(ParkingSlot $parkingSlot)
+    {
+        return view('admin.parking_slot.edit', compact('parkingSlot'));
+    }
 
+    public function update(Request $request, ParkingSlot $parkingSlot)
+    {
+        $request->validate([
+            'slot_no' => 'required',
+            'type' => 'required',
+            'block' => 'nullable|string',
+            'status' => 'required|boolean',
+        ]);
+
+        $parkingSlot->update($request->all());
+
+        return redirect()->route('admin.parking_slot.index')->with('success', 'Parking Slot updated successfully.');
+    }
+
+    public function destroy(ParkingSlot $parkingSlot)
+    {
+        $parkingSlot->delete();
+
+        return redirect()->route('admin.parking_slot.index')->with('success', 'Parking Slot deleted successfully.');
+    }
 }
