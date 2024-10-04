@@ -6,19 +6,26 @@ use App\Models\Expense;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB; // Ensure DB facade is imported
 use Illuminate\Support\Facades\Storage;
+use App\Models\Vendor;  // Include Vendor model for fetching vendor names
+
 
 class ExpenseController extends Controller
 {
     // Function to show the create expense form
     public function create()
     {
-        return view('admin.expenses.create');  // Correct view path for create.blade.php
+        // Fetch all vendors with their names (vendor_name column)
+        $vendors = DB::table('vendors')->select('id', 'vendor_name')->get();
+    
+        // Pass vendors to the view
+        return view('admin.expenses.create', compact('vendors'));
     }
+    
 
-    // Function to store new expenses
     public function store(Request $request)
     {
         $request->validate([
+            'vendor_name' => 'required|exists:vendors,id',  // Ensure vendor_name exists in the vendors table
             'category' => 'required|string',
             'description' => 'nullable|string',
             'amount' => 'required|numeric',
@@ -26,6 +33,7 @@ class ExpenseController extends Controller
             'month' => 'required|string',
             'file' => 'nullable|file|max:2048',
         ]);
+
 
         $fileName = null;
 
@@ -36,6 +44,8 @@ class ExpenseController extends Controller
         }
 
         Expense::create([
+            'vendor_name' => $request->vendor_name,  // Save the vendor ID
+
             'category' => $request->category,
             'description' => $request->description,
             'amount' => $request->amount,
@@ -47,96 +57,84 @@ class ExpenseController extends Controller
         return redirect()->back()->with('success', 'Expense added successfully');
     }
 
-    // Function to show all expenses
-    public function index()
-    {
-        $expenses = Expense::all();  // Retrieve all expenses from the database
-        return view('admin.expenses.index', compact('expenses'));  // Correct view path for index.blade.php
-    }
-
-    // Function to show edit form for a specific expense
-    public function edit($id)
-    {
-        $expense = Expense::findOrFail($id);
-        return view('admin.expenses.edit', compact('expense'));
-    }
-
-    // Function to update a specific expense
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'category' => 'required|string',
-            'description' => 'nullable|string',
-            'amount' => 'required|numeric',
-            'paid_date' => 'required|date',
-            'month' => 'required|string',
-            'file' => 'nullable|file|max:2048',
-        ]);
-
-        $expense = Expense::findOrFail($id);
-
-        $fileName = $expense->file_path;  // Keep the old file name if no new file is uploaded
-        if ($request->hasFile('file')) {
-            // Delete the old file if it exists
-            if ($expense->file_path) {
-                $oldFilePath = public_path('expenses/' . $expense->file_path);
-                if (file_exists($oldFilePath)) {
-                    unlink($oldFilePath);
-                }
-            }
-
-            // Upload the new file
-            $file = $request->file('file');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('expenses'), $fileName);
-        }
-
-        $expense->update([
-            'category' => $request->category,
-            'description' => $request->description,
-            'amount' => $request->amount,
-            'paid_date' => $request->paid_date,
-            'month' => $request->month,
-            'file_path' => $fileName,
-        ]);
-
-        return redirect()->route('expenses.index')->with('success', 'Expense updated successfully');
-    }
-
-    // Function to delete an expense
-    public function destroy($id)
-    {
-        $expense = Expense::findOrFail($id);
-
-        // Delete the file if it exists
-        if ($expense->file_path) {
-            $filePath = public_path('expenses/' . $expense->file_path);
-            if (file_exists($filePath)) {
-                unlink($filePath);
-            }
-        }
-
-        $expense->delete();
-        return redirect()->route('expenses.index')->with('success', 'Expense deleted successfully');
-    }
-
-    // Add the getExpenses function here to fetch total and monthly expenses
-    public function getExpenses()
-    {
-        
-        $totalExpenses = DB::table('expenses')->sum('amount');
-    
-  
-        $monthlyExpenses = DB::table('expenses')
-            ->select(DB::raw('MONTH(paid_date) as month'), DB::raw('SUM(amount) as total'))
-            ->groupBy(DB::raw('MONTH(paid_date)'))
-            ->get();
-    
-    
-        return view('admin.adminHome', [
-            'totalExpenses' => $totalExpenses,
-            'monthlyExpenses' => $monthlyExpenses
-        ]);
-    }
-    
-}
+     // List all expenses
+     public function index()
+     {
+         // Eager load the 'vendor' relationship to get vendor details efficiently
+         $expenses = Expense::with('vendor')->get();  // Retrieve all expenses with their associated vendors
+         return view('admin.expenses.index', compact('expenses'));
+     }
+     
+ 
+     // Display the form for editing an existing expense
+     public function edit($id)
+ {
+     $expense = Expense::findOrFail($id);
+     $vendors = Vendor::all(); // Fetch all vendors for the dropdown
+     return view('admin.expenses.edit', compact('expense', 'vendors'));
+ }
+ 
+     // Update an existing expense in the database
+     public function update(Request $request, $id)
+     {
+         $request->validate([
+             'vendor_name' => 'required|exists:vendors,id',  // Ensure vendor_name exists in the vendors table
+             'category' => 'required|string',
+             'description' => 'nullable|string',
+             'amount' => 'required|numeric',
+             'paid_date' => 'required|date',
+             'month' => 'required|string',
+             'file' => 'nullable|file|max:2048',
+         ]);
+ 
+         $expense = Expense::findOrFail($id);
+ 
+         $fileName = $expense->file_path;  // Keep the old file name if no new file is uploaded
+         if ($request->hasFile('file')) {
+             // Delete the old file if it exists
+             if ($expense->file_path) {
+                 $oldFilePath = public_path('expenses/' . $expense->file_path);
+                 if (file_exists($oldFilePath)) {
+                     unlink($oldFilePath);
+                 }
+             }
+ 
+             // Upload the new file
+             $file = $request->file('file');
+             $fileName = time() . '_' . $file->getClientOriginalName();
+             $file->move(public_path('expenses'), $fileName);
+         }
+ 
+         // Update the expense entry
+         $expense->update([
+             'vendor_name' => $request->vendor_name,
+             'category' => $request->category,
+             'description' => $request->description,
+             'amount' => $request->amount,
+             'paid_date' => $request->paid_date,
+             'month' => $request->month,
+             'file_path' => $fileName,
+         ]);
+ 
+         return redirect()->route('expenses.index')->with('success', 'Expense updated successfully');
+     }
+ 
+     // Delete an expense from the database
+     public function destroy($id)
+     {
+         $expense = Expense::findOrFail($id);
+ 
+         // Delete the file if it exists
+         if ($expense->file_path) {
+             $filePath = public_path('expenses/' . $expense->file_path);
+             if (file_exists($filePath)) {
+                 unlink($filePath);
+             }
+         }
+ 
+         // Delete the expense entry
+         $expense->delete();
+         return redirect()->route('expenses.index')->with('success', 'Expense deleted successfully');
+     }
+ }
+ 

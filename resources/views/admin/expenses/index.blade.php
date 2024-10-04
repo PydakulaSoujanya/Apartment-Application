@@ -20,6 +20,8 @@
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Vendor Name</th>
+
                 <th>Category</th>
                 <th>Description</th>
                 <th>Amount</th>
@@ -32,6 +34,7 @@
             @foreach($expenses as $expense)
             <tr>
                 <td>{{ $expense->id }}</td>
+                <td>{{ $expense->vendor->vendor_name ?? 'No Vendor' }}</td>  <!-- Fetch vendor_name, or 'No Vendor' if null -->
                 <td>{{ $expense->category }}</td>
                 <td>{{ $expense->description }}</td>
                 <td>{{ $expense->amount }}</td>

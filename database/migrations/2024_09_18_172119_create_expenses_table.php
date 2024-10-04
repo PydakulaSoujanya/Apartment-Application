@@ -10,15 +10,17 @@ class CreateExpensesTable extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('vendor_name')->constrained('vendors');  // Foreign key to vendors table
             $table->string('category');
             $table->text('description')->nullable();
             $table->decimal('amount', 10, 2);
             $table->date('paid_date');
             $table->string('month');
-            $table->string('file_path')->nullable();  // For storing the image path
+            $table->string('file_path')->nullable();
             $table->timestamps();
         });
     }
+    
 
     public function down()
     {

@@ -21,7 +21,7 @@
                         <dd class="col-sm-8">{{ $watchman->email }}</dd>
 
                         <dt class="col-sm-4">Education Qualification:</dt>
-                        <dd class="col-sm-8">{{ $watchman->qualifiacation }}</dd>
+                        <dd class="col-sm-8">{{ $watchman->qualification }}</dd>
 
                         <dt class="col-sm-4">Experience:</dt>
                         <dd class="col-sm-8">{{ $watchman->experience }}</dd>
