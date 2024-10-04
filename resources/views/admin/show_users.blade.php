@@ -27,7 +27,7 @@
             display: flex;
             align-items: center;
             font-weight: 10px;
-            margin-left: 100px;
+            margin-left: 0px;
             margin-top: -2px;
         }
 
@@ -98,10 +98,8 @@ left: 160px; /* Adjust positioning */
         <div class="card">
             <!-- Heading with icon similar to screenshot -->
             <div class="heading">
-                <div class="heading-icon">
-                    <i class="fas fa-users"></i> <!-- Icon beside "All Users" -->
-                </div>
-                <h1>All Users</h1>
+               
+                <h2>All Users</h2>
             </div>
 
             <!-- Filter and select role -->

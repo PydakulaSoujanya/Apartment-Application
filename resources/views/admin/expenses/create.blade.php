@@ -65,12 +65,19 @@
 
                         <!-- Submit Button -->
                         <div class="form-group row mb-0">
-                            <div class="col-md-12 text-center">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Submit') }}
-                                </button>
-                            </div>
-                        </div>
+    <div class="col-md-12 text-center">
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">
+            {{ __('Submit') }}
+        </button>
+
+        <!-- Close Button -->
+        <button type="button" class="btn btn-secondary ms-2" onclick="window.location='{{ url()->previous() }}'">
+            {{ __('Close') }}
+        </button>
+    </div>
+</div>
+
                     </form>
                 </div>
             </div>
