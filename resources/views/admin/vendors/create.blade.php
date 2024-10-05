@@ -42,11 +42,10 @@
                         <input type="email" name="vendor_email" id="vendor_email" class="form-control">
                     </div>
                     <div class="col-md-4">
-                        <label for="account_head" class="form-label">Account Head</label>
-                        <select name="account_head" id="account_head" class="form-select">
-                            <!-- Options go here -->
-                        </select>
-                    </div>
+    <label for="account_head" class="form-label">Account Head</label>
+    <input type="text" name="account_head" id="account_head" class="form-control">
+</div>
+
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-8">
@@ -179,6 +178,10 @@
         <button type="submit" class="btn btn-primary">
             <i class="fas fa-save me-2"></i>Save Expense
         </button>
+        <a href="{{ route('admin.vendors.view-vendors') }}" class="btn btn-primary">
+    <i class="fas fa-save me-2"></i>Close
+</a>
+
     </form>
 </div>
 @endsection
