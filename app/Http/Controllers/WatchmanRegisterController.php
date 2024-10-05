@@ -7,15 +7,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\User;
+use App\Models\Vendor;
 use App\Models\WatchmanDetail;
 use Illuminate\Support\Facades\Auth; 
 
 class WatchmanRegisterController extends Controller
 {
     public function showRegisterWatchmanForm()
-    {
-        return view('admin.register_watchman');
-    }
+{
+    $vendors = Vendor::all(); // Fetch all vendors
+    return view('admin.register_watchman', compact('vendors'));
+}
 
     public function registerWatchman(Request $request)
     {
@@ -29,6 +31,8 @@ class WatchmanRegisterController extends Controller
             'experience' => 'required|string|max:255',
             'aadhar_no' => 'required|string|max:255',
             'address' => 'required|string|max:255',
+            'vendor_id' => 'required|exists:vendors,id',  // Ensure the vendor exists
+
         ]);
 
         if ($validator->fails()) {
@@ -55,6 +59,7 @@ class WatchmanRegisterController extends Controller
             'experience' => $request->experience,
             'aadhar_no' => $request->aadhar_no,
             'address' => $request->address,
+            'vendor_id' => $request->vendor_id,  // Save selected vendor
         ]);
 
         return redirect()->route('admin.watchman-list')->with('status', 'Watchman registered successfully.');
@@ -78,7 +83,8 @@ public function viewWatchman($id)
 public function editWatchman($id)
 {
     $watchman = WatchmanDetail::findOrFail($id);
-    return view('admin.edit_watchman', compact('watchman'));
+    $vendors = Vendor::all(); // Fetch all vendors for the dropdown
+    return view('admin.edit_watchman', compact('watchman', 'vendors'));
 }
 
 public function updateWatchman(Request $request, $id)
@@ -94,6 +100,7 @@ public function updateWatchman(Request $request, $id)
         'experience' => 'required|string|max:255',
         'aadhar_no' => 'required|string|max:255',
         'address' => 'required|string|max:255',
+        'vendor_id' => 'required|exists:vendors,id', // Ensure vendor exists
     ]);
 
     // Update the watchman details

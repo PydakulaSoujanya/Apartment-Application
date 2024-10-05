@@ -8,9 +8,22 @@
                 <div class="card-header">Register Watchman</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.register.watchman') }}">
-                        @csrf <!-- Ensure CSRF protection -->
+                        @csrf
                         <table class="table">
                             <tbody>
+                                <!-- Add Vendor Selection -->
+                                <tr>
+                                    <td><label for="vendor" class="form-label">Select Vendor</label></td>
+                                    <td>
+                                        <select id="vendor" class="form-control" name="vendor_id" required>
+                                            <option value="">-- Select Vendor --</option>
+                                            @foreach($vendors as $vendor)
+                                                <option value="{{ $vendor->id }}">{{ $vendor->vendor_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                </tr>
+                                <!-- Other fields remain the same -->
                                 <tr>
                                     <td><label for="name" class="form-label">Name</label></td>
                                     <td>

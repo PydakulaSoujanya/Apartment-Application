@@ -18,6 +18,7 @@ class WatchmanDetail extends Model
         'experience',
         'aadhar_no',
         'address',
+        'vendor_id',
     ];
 
     public function user()

@@ -17,6 +17,8 @@ class CreateExpensesTable extends Migration
             $table->date('paid_date');
             $table->string('month');
             $table->string('file_path')->nullable();
+            $table->unsignedBigInteger('vendor_name')->after('id');  // You can position it where you want
+            $table->foreign('vendor_name')->references('id')->on('vendors')->onDelete('cascade');  // Foreign key constraint
             $table->timestamps();
         });
     }

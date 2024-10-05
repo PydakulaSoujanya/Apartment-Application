@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('resident_name'); // New field
             $table->string('checkin_time')->nullable();   // Make nullable
             $table->string('checkout_time')->nullable();  // Make nullable
+            $table->string('status')->default('pending');
             $table->timestamps();
     
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

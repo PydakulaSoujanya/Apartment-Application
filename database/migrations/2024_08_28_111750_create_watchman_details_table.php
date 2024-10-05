@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('experience');
             $table->string('aadhar_no');
             $table->string('address');
+            $table->string('vendor_id');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
