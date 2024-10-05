@@ -5,11 +5,11 @@
 @section('content')
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>Add New Vendor</h2>
-    
-    <a href="{{ route('admin.vendors.view-vendors') }}" class="btn btn-primary">View Vendors</a>
-  </div> 
-<form action="{{ route('admin.vendors.store') }}" method="POST" enctype="multipart/form-data">
+        <h2>Add New Vendor</h2>
+        <a href="{{ route('admin.vendors.view-vendors') }}" class="btn btn-primary">View Vendors</a>
+    </div>
+
+    <form action="{{ route('admin.vendors.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <!-- Vendor Details -->
@@ -21,7 +21,7 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="vendor_id" class="form-label">Vendor ID</label>
-                        <input type="text" name="vendor_id" id="vendor_id" class="form-control">
+                        <input type="text" name="vendor_id" id="vendor_id" class="form-control" required>
                     </div>
                     <div class="col-md-4">
                         <label for="vendor_name" class="form-label">Vendor Name*</label>
@@ -42,10 +42,9 @@
                         <input type="email" name="vendor_email" id="vendor_email" class="form-control">
                     </div>
                     <div class="col-md-4">
-    <label for="account_head" class="form-label">Account Head</label>
-    <input type="text" name="account_head" id="account_head" class="form-control">
-</div>
-
+                        <label for="account_head" class="form-label">Account Head</label>
+                        <input type="text" name="account_head" id="account_head" class="form-control">
+                    </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-8">
@@ -176,12 +175,8 @@
         </div>
 
         <button type="submit" class="btn btn-primary">
-            <i class="fas fa-save me-2"></i>Save Expense
+            <i class="fas fa-save me-1"></i> Save Vendor
         </button>
-        <a href="{{ route('admin.vendors.view-vendors') }}" class="btn btn-primary">
-    <i class="fas fa-save me-2"></i>Close
-</a>
-
     </form>
 </div>
 @endsection
