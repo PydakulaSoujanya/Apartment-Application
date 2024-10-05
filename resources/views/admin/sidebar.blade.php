@@ -50,145 +50,102 @@
             <i class="bi bi-chevron-left collapse-icon" id="collapseBtn"></i>
         </div>
         <ul class="nav flex-column sidebar-nav">
-
     <li class="nav-item">
-        <a class="nav-link active" href="{{ route('admin.home') }}">
+        <a class="nav-link {{ Request::is('admin/home') ? 'active' : '' }}" href="{{ route('admin.home') }}">
             <i class="bi bi-house-door"></i>
             <span class="nav-text">Dashboard</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.show_users') }}">
+        <a class="nav-link {{ Request::is('admin/users*') ? 'active' : '' }}" href="{{ route('admin.show_users') }}">
             <i class="bi bi-people"></i>
             <span class="nav-text">View Users</span>
-            <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
     </li>
-    <!-- <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.categories.index') }}">
-            <i class="bi bi-list-ul"></i>
-            <span class="nav-text">Categories</span>
-            <i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-    </li> -->
-    
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.view.residents') }}">
+        <a class="nav-link {{ Request::is('admin/view-residents') ? 'active' : '' }}" href="{{ route('admin.view.residents') }}">
             <i class="bi bi-person-plus"></i>
             <span class="nav-text">New User</span>
-            <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
     </li>
-    
-    <li class="nav-item">   
-        <a class="nav-link" href="{{ route('expenses.index') }}">
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('expenses*') ? 'active' : '' }}" href="{{ route('expenses.index') }}">
             <i class="bi bi-currency-dollar"></i>
             <span class="nav-text">Expenses</span>
-            <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
     </li>
-
-            
-
-<li class="nav-item">   
-<a class="nav-link" href="{{ route('admin.resident.index') }}">
-
-        <i class="bi bi-cart"></i>
-        <span class="nav-text"> Maintenance</span>
-        <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
-    </a>
-</li>
-
-    <li class="nav-item">   
-        <a class="nav-link" href="{{ route('admin.flatimport.index') }}">
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('admin/resident*') ? 'active' : '' }}" href="{{ route('admin.resident.index') }}">
+            <i class="bi bi-cart"></i>
+            <span class="nav-text">Maintenance</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('admin/flatimport*') ? 'active' : '' }}" href="{{ route('admin.flatimport.index') }}">
             <i class="bi bi-building"></i>
             <span class="nav-text">Flats Registration</span>
-            <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
     </li>
-
-    <li class="nav-item">   
-        <a class="nav-link" href="{{ route('admin.facilities.index') }}">
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('admin/facilities*') ? 'active' : '' }}" href="{{ route('admin.facilities.index') }}">
             <i class="bi bi-gear"></i>
             <span class="nav-text">Facilities</span>
-            <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
     </li>
-
-    <li class="nav-item">   
-        <a class="nav-link" href="{{ route('admin.activities.index') }}">
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('admin/activities*') ? 'active' : '' }}" href="{{ route('admin.activities.index') }}">
             <i class="bi bi-calendar-check"></i>
             <span class="nav-text">Activities</span>
-            <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
     </li>
-
-    <li class="nav-item">   
-        <a class="nav-link" href="{{ route('admin.parking.index') }}">
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('admin/parking*') ? 'active' : '' }}" href="{{ route('admin.parking.index') }}">
             <i class="bi bi-car-front"></i>
             <span class="nav-text">Parking</span>
-            <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
     </li>
-    <li class="nav-item">   
-        <a class="nav-link" href="{{ route('admin.watchman-list') }}">
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('admin/watchman-list') ? 'active' : '' }}" href="{{ route('admin.watchman-list') }}">
             <i class="bi bi-person-badge"></i>
             <span class="nav-text">Watchman</span>
-            <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
     </li>
-    <li class="nav-item">   
-        <a class="nav-link" href="{{ route('admin.secondaryuser-list') }}">
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('admin/secondaryuser-list') ? 'active' : '' }}" href="{{ route('admin.secondaryuser-list') }}">
             <i class="bi bi-person-badge"></i>
             <span class="nav-text">SecondaryUser</span>
-            <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
         </a>
     </li>
-
-    <li class="nav-item">   
-        <a class="nav-link" href="{{ route('admin.helpdesk.opendesk') }}">
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('admin/helpdesk*') ? 'active' : '' }}" href="{{ route('admin.helpdesk.opendesk') }}">
             <i class="bi bi-envelope-open"></i>
             <span class="nav-text">Open Request</span>
         </a>
     </li>
-
-
-<li class="nav-item">   
-    <!-- <a class="nav-link" href="{{ route('admin.staff.view-staff') }}"> -->
-    <a class="nav-link" href="{{ route('admin.staff.view-staff') }}">
-        <i class="bi bi-people"></i>
-        <span class="nav-text">Staff Manager</span>
-        <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
-    </a>
-</li>
-<li class="nav-item">   
-    <a class="nav-link" href="{{ route('admin.vendors.view-vendors') }}">
-        <i class="bi bi-shop"></i>
-        <span class="nav-text">Vendor Master</span>
-        <!-- <i class="bi bi-chevron-down ms-auto"></i> -->
-    </a>
-</li>
-      
-<li class="nav-item">   
-    <a class="nav-link" href="{{ route('admin.projects.index') }}">
-        <i class="bi bi-kanban"></i>
-        <span class="nav-text">Projects&Meetings</span>
-        
-    </a>
-</li>
-<li class="nav-item">   
-    <a class="nav-link" href="{{ route('admin.admin-files.resident-docs') }}">
-        <i class="bi bi-files"></i>
-        <span class="nav-text">Admin Files</span>
-        
-    </a>
-</li>
-
-
-
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('admin/staff*') ? 'active' : '' }}" href="{{ route('admin.staff.view-staff') }}">
+            <i class="bi bi-people"></i>
+            <span class="nav-text">Staff Manager</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('admin/vendors*') ? 'active' : '' }}" href="{{ route('admin.vendors.view-vendors') }}">
+            <i class="bi bi-shop"></i>
+            <span class="nav-text">Vendor Master</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('admin/projects*') ? 'active' : '' }}" href="{{ route('admin.projects.index') }}">
+            <i class="bi bi-kanban"></i>
+            <span class="nav-text">Projects & Meetings</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ Request::is('admin/admin-files*') ? 'active' : '' }}" href="{{ route('admin.admin-files.resident-docs') }}">
+            <i class="bi bi-files"></i>
+            <span class="nav-text">Admin Files</span>
+        </a>
+    </li>
 </ul>
 
     </div>

@@ -1,3 +1,5 @@
+
+
 <!-- @extends('layouts.app') -->
 
 @section('content')
@@ -7,7 +9,11 @@
     <div class="row w-100 justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header">{{ __('Register Admin') }}</div>
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span>{{ __('Register Admin') }}</span>
+                    <!-- Visible Close Button -->
+                    <button type="button" class="btn-close" aria-label="Close" onclick="window.location='{{ url()->previous() }}'"></button>
+                </div>
                 <div class="card-body">
                     <form action="{{ route('superadmin.register.admin') }}" method="POST">
                         @csrf
@@ -91,7 +97,12 @@
                         <!-- Submit Button -->
                         <div class="form-group row mb-0">
                             <div class="col-md-12 text-center mt-3">
-                                <button type="submit" class="btn btn-primary">{{ __('Register Admin') }}</button>
+                                <button type="submit" class="btn btn-primary">{{ __('Register Admin') }}</button> 
+                                
+                                <button type="button" class="btn btn-secondary ms-2" onclick="window.location='{{ url()->previous() }}'">
+            {{ __('Close') }}
+        </button>
+
                             </div>
                         </div>
                     </form>

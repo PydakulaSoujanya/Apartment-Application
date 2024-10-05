@@ -10,15 +10,22 @@ use App\Models\ResidentDetail;
 use Illuminate\Support\Facades\Auth;
 use App\Models\AdminOtp;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Flat;
 
 
 class ResidentRegisterController extends Controller
 {
-    // Show form for registering a new resident
+         // Show form for registering a new resident
     public function showRegisterResidentForm()
     {
-        return view('admin.register_resident');
+        // Fetch flats with status 'Available'
+        $availableFlats = Flat::where('status', 'Available')->get(['flat_number', 'floor', 'block']);
+
+        // Pass available flats data to the view
+        return view('admin.register_resident', compact('availableFlats'));
     }
+
+
 
  
     // Handle the resident registration process
