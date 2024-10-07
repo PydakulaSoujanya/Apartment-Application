@@ -64,9 +64,11 @@
 
                         <!-- Submit Button -->
                         <div class="form-group row mb-0">
-                            <div class="col-md-12 text-center">
-                                <button type="submit" class="btn btn-primary mt-2">Add Activity</button>
-                            </div>
+                        <div class="col-md-12 text-center">
+    <button type="submit" class="btn btn-primary mt-2">Add Activity</button>
+    <a href="{{ route('admin.activities.index') }}" class="btn btn-secondary mt-2">Close</a>
+</div>
+
                         </div>
                     </form>
                 </div>

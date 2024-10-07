@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 
-
 class VendorController extends Controller
 {
     // Display a listing of all vendors
@@ -49,14 +48,14 @@ class VendorController extends Controller
             'bank_ifsc_code' => 'nullable|string|max:255',
             'document' => 'nullable|file|mimes:pdf,doc,docx|max:2048', // File validation
         ]);
-
+    
         try {
             // Handle file upload
             $documentPath = null;
             if ($request->hasFile('document')) {
                 $documentPath = $request->file('document')->store('vendor-documents', 'public');
             }
-
+    
             // Store vendor data into the vendors table
             Vendor::create([
                 'vendor_id' => $request->vendor_id,
@@ -82,15 +81,17 @@ class VendorController extends Controller
                 'bank_ifsc_code' => $request->bank_ifsc_code,
                 'document_path' => $documentPath, // Store file path
             ]);
-
+    
             // Redirect after storing with a success message
             return redirect()->route('admin.vendors.view-vendors')->with('success', 'Vendor added successfully.');
-
+    
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to add vendor. Please try again.');
+            // Log error and redirect back with an error message
+            Log::error('Error adding vendor: ' . $e->getMessage());
+            return back()->withErrors(['error' => 'An error occurred while adding the vendor. Please try again.']);
         }
     }
-
+    
     // Show the form for editing a vendor
     public function edit(Vendor $vendor)
     {
@@ -143,8 +144,8 @@ class VendorController extends Controller
             ]);
 
             return redirect()->route('admin.vendors.view-vendors')->with('success', 'Vendor updated successfully.');
-
         } catch (\Exception $e) {
+            Log::error($e->getMessage());
             return redirect()->back()->with('error', 'Failed to update vendor. Please try again.');
         }
     }
@@ -159,9 +160,17 @@ class VendorController extends Controller
     public function destroy(Vendor $vendor)
     {
         try {
+            // Delete file if it exists
+            if ($vendor->document_path) {
+                Storage::delete('public/' . $vendor->document_path);
+            }
+
+            // Soft delete the vendor
             $vendor->delete();
+
             return redirect()->route('admin.vendors.view-vendors')->with('success', 'Vendor deleted successfully.');
         } catch (\Exception $e) {
+            Log::error($e->getMessage());
             return redirect()->back()->with('error', 'Failed to delete vendor. Please try again.');
         }
     }
