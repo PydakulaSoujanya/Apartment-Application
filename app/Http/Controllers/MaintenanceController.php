@@ -7,9 +7,28 @@ use App\Models\MaintenancePayment;
 use App\Models\ResidentDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class MaintenanceController extends Controller
 {
+
+    public function showMonthlyMaintenanceTotals()
+{
+    // Fetch maintenance payments grouped by year and month
+    $monthlyTotals = DB::table('maintenance_payments')
+        ->select(
+            DB::raw('YEAR(payment_date) as year'),
+            DB::raw('MONTH(payment_date) as month'),
+            DB::raw('SUM(amount) as total_amount')
+        )
+        ->groupBy(DB::raw('YEAR(payment_date)'), DB::raw('MONTH(payment_date)'))
+        ->orderBy(DB::raw('YEAR(payment_date)'), 'desc')
+        ->orderBy(DB::raw('MONTH(payment_date)'), 'desc')
+        ->get();
+
+    // Return the view with the monthly totals
+    return view('maintenance.monthly_totals', compact('monthlyTotals'));
+}
     // Show the payment form
     public function showPaymentForm()
     {

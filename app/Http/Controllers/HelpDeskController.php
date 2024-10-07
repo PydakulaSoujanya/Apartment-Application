@@ -7,11 +7,18 @@ use Illuminate\Http\Request;
 
 class HelpDeskController extends Controller
 {
-    // Display all help desk requests
+    // Display help desk requests for residents
     public function index()
     {
         $requests = HelpDeskRequest::all();
         return view('resident.helpdesk.index', compact('requests'));
+    }
+
+    // Display help desk requests for admins
+    public function adminIndex()
+    {
+        $requests = HelpDeskRequest::all();
+        return view('admin.helpdesk.index', compact('requests'));
     }
 
     // Show the form for creating a new help desk request
@@ -50,7 +57,7 @@ class HelpDeskController extends Controller
             'preferred_date' => $validated['preferred_date'],
             'urgent' => $validated['urgent'] ?? false,
             'attachments' => implode(',', $attachments),
-            'status' => 'OPEN',
+            'status' => 'Not Yet Started', // Default status
         ]);
 
         return redirect()->back()->with('success', 'Help Desk request submitted successfully!');
@@ -107,4 +114,19 @@ class HelpDeskController extends Controller
 
         return redirect()->route('resident.helpdesk.index')->with('success', 'Help Desk request deleted successfully!');
     }
+
+    // Update the status of a specific help desk request (Admin Only)
+    public function updateStatus(Request $request, $id)
+{
+    $validated = $request->validate([
+        'status' => 'required|string|in:Not Yet Started,In Progress,Completed',
+    ]);
+
+    $helpRequest = HelpDeskRequest::findOrFail($id);
+    $helpRequest->status = $validated['status'];
+    $helpRequest->save();
+
+    return redirect()->route('admin.helpdesk.index')->with('success', 'Status updated successfully!');
+}
+
 }

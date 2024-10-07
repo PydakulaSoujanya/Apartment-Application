@@ -14,6 +14,10 @@
             <label for="amount_per_sqt">Amount per Square Meter:</label>
             <input type="number" step="0.01" class="form-control" id="amount_per_sqt" name="amount_per_sqt" required>
         </div>
+        <div class="form-group">
+            <label for="month_year">Select Month and Year:</label>
+            <input type="month" class="form-control" id="month_year" name="month_year" required>
+        </div>
         <button type="submit" class="btn btn-primary">Add Charge</button>
     </form>
 
@@ -22,6 +26,7 @@
             <tr>
                 <th>ID</th>
                 <th>Amount per Square Meter</th>
+                <th>Month and Year</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -34,9 +39,11 @@
                         @csrf
                         @method('PUT')
                         <input type="number" step="0.01" name="amount_per_sqt" value="{{ $charge->amount_per_sqt }}" required>
+                        <input type="month" name="month_year" value="{{ $charge->month_year }}" required>
                         <button type="submit" class="btn btn-warning btn-sm">Update</button>
                     </form>
                 </td>
+                <td>{{ $charge->month_year }}</td>
                 <td>
                     <form action="{{ route('maintenance.destroy', $charge->id) }}" method="POST" class="d-inline">
                         @csrf

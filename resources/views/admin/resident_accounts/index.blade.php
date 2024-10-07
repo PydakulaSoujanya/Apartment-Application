@@ -34,6 +34,7 @@
                         <th>Mobile</th>
                         <th>Email</th>
                         <th>Area (SFT)</th>
+                        <th>Month</th>
                         <th>Maintenance Charge (Per SFT)</th>
                         <th>Total Maintenance Cost</th>
                         <th>Status</th>
@@ -50,6 +51,7 @@
                             <td>{{ $resident->mobile }}</td>
                             <td>{{ $resident->email }}</td>
                             <td>{{ $resident->area }}</td>
+                            <td>October 2024</td>
                             <td>
                                 @if($latestCharge)
                                     {{ $latestCharge->amount_per_sqt }}

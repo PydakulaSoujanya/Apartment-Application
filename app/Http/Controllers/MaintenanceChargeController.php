@@ -17,10 +17,12 @@ class MaintenanceChargeController extends Controller
     {
         $request->validate([
             'amount_per_sqt' => 'required|numeric',
+            'month_year' => 'required|date_format:Y-m', // Validate month and year
         ]);
 
         MaintenanceCharge::create([
             'amount_per_sqt' => $request->amount_per_sqt,
+            'month_year' => $request->month_year, // Store the month and year
             'admin_id' => Auth::id(), // Assuming the admin is logged in
         ]);
 
@@ -31,9 +33,13 @@ class MaintenanceChargeController extends Controller
     {
         $request->validate([
             'amount_per_sqt' => 'required|numeric',
+            'month_year' => 'required|date_format:Y-m', // Validate month and year
         ]);
 
-        $maintenanceCharge->update($request->only('amount_per_sqt'));
+        $maintenanceCharge->update([
+            'amount_per_sqt' => $request->amount_per_sqt,
+            'month_year' => $request->month_year, // Update the month and year
+        ]);
 
         return redirect()->back()->with('success', 'Maintenance Charge Updated Successfully');
     }
@@ -44,4 +50,3 @@ class MaintenanceChargeController extends Controller
         return redirect()->back()->with('success', 'Maintenance Charge Deleted Successfully');
     }
 }
-

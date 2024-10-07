@@ -424,6 +424,18 @@ Route::put('/requests/{id}', [HelpDeskController::class, 'update'])->name('reque
 Route::delete('/requests/{id}', [HelpDeskController::class, 'destroy'])->name('requests.destroy');
 
 
+Route::prefix('admin/helpdesk')->name('admin.helpdesk.')->group(function () {
+    Route::get('/', [HelpDeskController::class, 'adminindex'])->name('index');
+    Route::get('/create', [HelpDeskController::class, 'create'])->name('create');
+    Route::post('/store', [HelpDeskController::class, 'store'])->name('store');
+    Route::get('/{id}', [HelpDeskController::class, 'show'])->name('show');
+    Route::get('/{id}/edit', [HelpDeskController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [HelpDeskController::class, 'update'])->name('update');
+    Route::delete('/{id}', [HelpDeskController::class, 'destroy'])->name('destroy');
+    Route::put('/admin/helpdesk/{id}/update', [HelpDeskController::class, 'updateStatus'])->name('admin.helpdesk.update');
+
+});
+
 Route::get('/resident/moderate-forum', function () {
     return view('resident.moderate-forum.moderate-forum');
 })->name('resident.moderate-forum.moderate-forum');
