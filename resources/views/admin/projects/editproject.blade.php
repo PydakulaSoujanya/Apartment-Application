@@ -48,6 +48,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Update Project</button>
+        <a href="{{ route('admin.projects.index') }}" class="btn btn-secondary">Close</a>
     </form>
 </div>
 @endsection

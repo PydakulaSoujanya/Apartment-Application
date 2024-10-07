@@ -141,6 +141,8 @@ Route::get('/watchman/visitors/create', [WatchmanVisitorController::class, 'crea
     Route::get('visitors', [WatchmanVisitorController::class, 'index'])->name('watchman.visitors.index');
     Route::get('visitors/checkin/{id}', [WatchmanVisitorController::class, 'checkin'])->name('watchman.visitors.checkin');
     Route::get('visitors/checkout/{id}', [WatchmanVisitorController::class, 'checkout'])->name('watchman.visitors.checkout');
+Route::get('/watchman/visitors/get-resident-details', [WatchmanVisitorController::class, 'getResidentDetails'])->name('watchman.visitors.getResidentDetails');
+
 });
 
  

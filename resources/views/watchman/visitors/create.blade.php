@@ -1,13 +1,3 @@
-<!-- Include Select2 CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-
-<!-- Include jQuery (if not already included) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- Include Select2 JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
-
 @extends('layouts.watchman')
 
 @section('title', 'All Visitors')
@@ -22,13 +12,6 @@
             <form action="{{ route('visitors.store') }}" method="POST">
                 @csrf
                 <div class="row mb-3">
-                    <!-- <div class="col-md-6">
-                        <label for="flatNumber" class="form-label">Flat Number</label>
-                        <select class="form-select" id="flatNumber" name="flat_number" style="width: 100%;">
-                            <option value="101">101</option>
-                            <option value="202">202</option>
-                        </select>
-                    </div> -->
                     <div class="col-md-6">
                         <label for="flatNumber" class="form-label">Flat Number</label>
                         <select class="form-select" id="flatNumber" name="flat_number" style="width: 100%;">
@@ -47,6 +30,7 @@
                         <label for="mobile" class="form-label">Resident Contact</label>
                         <input type="text" class="form-control" id="mobile" name="mobile" placeholder="">
                     </div>
+                </div>
 
                 <div class="row mb-3">
                     <div class="col-md-6">
@@ -68,13 +52,6 @@
                         <label for="visitingDate" class="form-label">Visiting Date</label>
                         <input type="date" class="form-control" id="visitingDate" name="visiting_date">
                     </div>
-                    <!-- <div class="col-md-6">
-    <label for="status_approved" class="form-label">Status Approved</label>
-    <input type="text" class="form-control" id="status_approved" name="status_approved" placeholder="Enter status approval">
-</div> -->
-
-   
-
                 </div>
 
                 <div class="mb-3">
@@ -87,5 +64,46 @@
         </div>
     </div>
 </div>
-
 @endsection
+
+<!-- Include Select2 CSS & JS and jQuery if not loaded -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        // Initialize Select2 for flat number dropdown
+        $('#flatNumber').select2({
+            placeholder: 'Select Flat Number',
+            allowClear: true
+        });
+
+        // AJAX call to fetch resident details based on selected flat number
+        $('#flatNumber').on('change', function() {
+            var flatNumber = $(this).val();
+            if (flatNumber) {
+                $.ajax({
+                    url: '{{ route("watchman.visitors.getResidentDetails") }}',
+                    type: 'GET',
+                    data: { flat_number: flatNumber },
+                    success: function(data) {
+                        // Populate resident name and contact fields
+                        $('#residentName').val(data.name || '');
+                        $('#mobile').val(data.mobile || '');
+                    },
+                    error: function(xhr) {
+                        // Clear fields if no resident is found
+                        $('#residentName').val('');
+                        $('#mobile').val('');
+                        alert('Resident details not available for this flat.');
+                    }
+                });
+            } else {
+                // Clear fields if no flat is selected
+                $('#residentName').val('');
+                $('#mobile').val('');
+            }
+        });
+    });
+</script>

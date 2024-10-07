@@ -36,7 +36,10 @@ public function getResidentDetails(Request $request)
     $resident = ResidentDetail::where('flat_number', $flatNumber)->first();
 
     if ($resident) {
-        return response()->json($resident); // Respond with the resident details
+        return response()->json([
+            'name' => $resident->name,  // Fetches resident name
+            'mobile' => $resident->mobile,  // Fetches resident mobile
+        ]);
     }
 
     return response()->json(['error' => 'Resident not found'], 404);
