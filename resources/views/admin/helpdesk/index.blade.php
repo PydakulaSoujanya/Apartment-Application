@@ -39,7 +39,7 @@
 
     <div class="input-group">
         <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
-            <option value="Not Yet Started" {{ $request->status == 'Not Yet Started' ? 'selected' : '' }}>Not Yet Started</option>
+            <!-- <option value="Not Yet Started" {{ $request->status == 'Not Yet Started' ? 'selected' : '' }}>Not Yet Started</option> -->
             <option value="In Progress" {{ $request->status == 'In Progress' ? 'selected' : '' }}>In Progress</option>
             <option value="Completed" {{ $request->status == 'Completed' ? 'selected' : '' }}>Completed</option>
         </select>

@@ -11,12 +11,11 @@
 
 <div class="d-flex justify-content-between align-items-center mb-3">
     <div style="position: relative;">
-    <h2>Help Desk Requests</h2>
-    <!-- Floating Action Button for adding a new request -->
-    <a href="{{ route('submit.request.form') }}" class="btn btn-primary rounded-circle shadow-lg">
-        <i class="fas fa-plus" style="font-size: 1.5rem;"></i>
-    </a>
-</div>
+        <h2>Help Desk Requests</h2>
+        <a href="{{ route('submit.request.form') }}" class="btn btn-primary rounded-circle shadow-lg">
+            <i class="fas fa-plus" style="font-size: 1.5rem;"></i>
+        </a>
+    </div>
 
     <div class="input-group" style="max-width: 500px;">
         <input type="text" class="form-control" placeholder="Search" aria-label="Search">
@@ -61,8 +60,16 @@
             <p>No file uploaded</p>
         @endif
 
-        <!-- Edit and Delete Icons aligned and spaced properly -->
+        <!-- Status Update Button -->
         <div class="d-flex justify-content-end mt-3">
+            <form action="{{ route('requests.updateStatus', $request->id) }}" method="POST" class="mr-2">
+                @csrf
+                @method('PUT')
+                <button type="submit" class="btn {{ $request->status == 'Completed' ? 'btn-success' : 'btn-warning' }}">
+                    {{ $request->status == 'Completed' ? 'Completed' : 'In Progress' }}
+                </button>
+            </form>
+
             <!-- Edit Icon -->
             <a href="{{ route('requests.edit', $request->id) }}" class="text-primary mx-2" title="Edit">
                 <i class="fas fa-edit fa-lg"></i>
@@ -81,11 +88,8 @@
 </div>
 @endforeach
 
-
-
 <!-- FontAwesome Icons -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
 
 @endsection

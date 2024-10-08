@@ -116,17 +116,19 @@ class HelpDeskController extends Controller
     }
 
     // Update the status of a specific help desk request (Admin Only)
-    public function updateStatus(Request $request, $id)
-{
-    $validated = $request->validate([
-        'status' => 'required|string|in:Not Yet Started,In Progress,Completed',
-    ]);
+    public function updateStatus($id)
+    {
+        $helpdeskRequest = HelpDeskRequest::findOrFail($id);
+        
+        // Toggle between statuses
+        if ($helpdeskRequest->status == 'In Progress') {
+            $helpdeskRequest->status = 'Completed';
+        } else {
+            $helpdeskRequest->status = 'In Progress';
+        }
+        
+        $helpdeskRequest->save();
 
-    $helpRequest = HelpDeskRequest::findOrFail($id);
-    $helpRequest->status = $validated['status'];
-    $helpRequest->save();
-
-    return redirect()->route('admin.helpdesk.index')->with('success', 'Status updated successfully!');
-}
-
+        return redirect()->back()->with('success', 'Status updated successfully.');
+    }
 }

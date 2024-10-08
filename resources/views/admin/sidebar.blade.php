@@ -119,9 +119,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Request::is('admin/helpdesk*') ? 'active' : '' }}" href="{{ route('admin.helpdesk.opendesk') }}">
+                        <a class="nav-link {{ Request::is('admin/helpdesk*') ? 'active' : '' }}" href="{{ route('admin.helpdesk.index') }}">
                             <i class="bi bi-envelope-open"></i>
-                            <span class="nav-text">Open Request</span>
+                            <span class="nav-text">Requests</span>
                         </a>
                     </li>
                     <li class="nav-item">

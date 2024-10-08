@@ -399,33 +399,20 @@ Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(functio
 });
 
 
-use App\Http\Controllers\DocumentController;
-
-Route::get('/resident/documents', [DocumentController::class, 'index'])->name('resident.document.index');
-
-// use App\Http\Controllers\HelpDeskController;
-
-// Route::get('/resident/helpdesk', [HelpDeskController::class, 'index'])->name('resident.helpdesk.index');
-
 use App\Http\Controllers\HelpDeskController;
 
+// Resident Routes
 Route::get('/resident/helpdesk', [HelpDeskController::class, 'index'])->name('resident.helpdesk.index');
-// Route to handle the help desk form submission
 Route::post('/helpdesk/submit', [HelpDeskController::class, 'store'])->name('submit.request');
-
-// Route to display the form for creating a new help desk request
 Route::get('/helpdesk/create', [HelpDeskController::class, 'create'])->name('submit.request.form');
-
-// Route to show the edit form for a help desk request
 Route::get('/requests/{id}/edit', [HelpDeskController::class, 'edit'])->name('requests.edit');
-
-// Route to update a help desk request
 Route::put('/requests/{id}', [HelpDeskController::class, 'update'])->name('requests.update');
-
-// Route to delete a help desk request
 Route::delete('/requests/{id}', [HelpDeskController::class, 'destroy'])->name('requests.destroy');
 
+// New Route for Updating Status (Resident)
+Route::put('/requests/{id}/update-status', [HelpDeskController::class, 'updateStatus'])->name('requests.updateStatus');
 
+// Admin Routes with Prefix
 Route::prefix('admin/helpdesk')->name('admin.helpdesk.')->group(function () {
     Route::get('/', [HelpDeskController::class, 'adminindex'])->name('index');
     Route::get('/create', [HelpDeskController::class, 'create'])->name('create');
@@ -434,9 +421,11 @@ Route::prefix('admin/helpdesk')->name('admin.helpdesk.')->group(function () {
     Route::get('/{id}/edit', [HelpDeskController::class, 'edit'])->name('edit');
     Route::put('/{id}', [HelpDeskController::class, 'update'])->name('update');
     Route::delete('/{id}', [HelpDeskController::class, 'destroy'])->name('destroy');
-    Route::put('/admin/helpdesk/{id}/update', [HelpDeskController::class, 'updateStatus'])->name('admin.helpdesk.update');
 
+    // New Route for Updating Status (Admin)
+    Route::put('/{id}/update-status', [HelpDeskController::class, 'updateStatus'])->name('updateStatus');
 });
+
 
 Route::get('/resident/moderate-forum', function () {
     return view('resident.moderate-forum.moderate-forum');

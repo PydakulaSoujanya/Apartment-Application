@@ -102,7 +102,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('resident.document.index') }}">
+                        <a class="nav-link" href="{{ route('resident.helpdesk.index') }}">
                             <i class="bi bi-file-earmark-text"></i>
                             <span class="nav-text">Documents</span>
                         </a>
